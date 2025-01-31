@@ -65,8 +65,8 @@ export default function Cursor(): JSX.Element {
 
       // MANAGE ROBOT
       setRobotPosition({
-        x: circle.current.x + 40,
-        y: circle.current.y + 20,
+        x: circle.current.x + 15,
+        y: circle.current.y + 10,
       });
 
       requestAnimationFrame(tick);

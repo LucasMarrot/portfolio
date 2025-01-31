@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 type RobotProps = {
   positionX: number;
@@ -8,6 +9,7 @@ type RobotProps = {
 
 export default function Robot(props: RobotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const mixerRef = useRef<THREE.AnimationMixer | null>(null);
 
   React.useEffect(() => {
     if (!containerRef.current) return;
@@ -22,7 +24,9 @@ export default function Robot(props: RobotProps): JSX.Element {
       0.1,
       1000
     );
-    camera.position.z = 1.5;
+    camera.position.z = 300;
+    camera.position.y = 150;
+    camera.position.x = 0;
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -31,33 +35,65 @@ export default function Robot(props: RobotProps): JSX.Element {
       containerRef.current.clientHeight
     );
     renderer.setClearColor(0x000000, 0); // Set background to transparent
+    renderer.shadowMap.enabled = true;
     containerRef.current.appendChild(renderer.domElement);
 
-    // Cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshStandardMaterial({ color: "orange" });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Load 3D Model
+    const loader = new GLTFLoader();
+    loader.load(
+      "/models/robot.glb", // Path to your model file
+      (gltf) => {
+        const modelRobot = gltf.scene;
+        modelRobot.position.set(0, 0, 0); // Position the model in front of the camera
+        scene.add(modelRobot);
+
+        // Enable shadows for the model
+        modelRobot.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            child.castShadow = true; // The model casts shadows
+            child.receiveShadow = true; // The model receives shadows
+          }
+        });
+
+        scene.add(modelRobot);
+
+        // Animation Mixer
+        const mixer = new THREE.AnimationMixer(modelRobot);
+        mixerRef.current = mixer;
+
+        // Play the third animation (index 2)
+        if (gltf.animations.length > 2) {
+          const action = mixer.clipAction(gltf.animations[2], modelRobot);
+          action.play();
+        }
+
+        // Animation
+        const clock = new THREE.Clock();
+        const animate = () => {
+          requestAnimationFrame(animate);
+
+          const delta = clock.getDelta();
+          mixer.update(delta);
+
+          renderer.render(scene, camera);
+        };
+
+        animate();
+      },
+      undefined,
+      (error) => {
+        console.error("An error happened while loading the model", error);
+      }
+    );
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
-
-    // Animation
-    const animate = () => {
-      requestAnimationFrame(animate);
-
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(0, 10, 10); // Position the light behind and above the camera
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
 
     // Cleanup on unmount
     return () => {
@@ -71,8 +107,8 @@ export default function Robot(props: RobotProps): JSX.Element {
     <div
       ref={containerRef}
       style={{
-        width: "100px",
-        height: "100px",
+        width: "150px",
+        height: "150px",
         position: "absolute",
         top: `${props.positionY}px`,
         left: `${props.positionX}px`,
