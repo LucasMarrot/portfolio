@@ -1,0 +1,20 @@
+.circle {
+  --circle-size: 10px;
+  position: fixed;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  background-color: black;
+  border-radius: 100%;
+  top: calc(var(--circle-size) / 2 * -1);
+  left: calc(var(--circle-size) / 2 * -1);
+  pointer-events: none;
+}
+
+.square {
+  --square-size: 20px;
+  position: fixed;
+  height: var(--square-size);
+  width: var(--square-size);
+  background-color: red;
+  pointer-events: none;
+}
