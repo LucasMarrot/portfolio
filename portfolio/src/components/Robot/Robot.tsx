@@ -7,6 +7,14 @@ type RobotProps = {
   positionY: number;
 };
 
+enum RobotAnimation {
+  Greet = 0,
+  ArmRaised = 1,
+  Idle = 2,
+  Walk = 3,
+  Welcome = 4,
+}
+
 export default function Robot(props: RobotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
@@ -63,7 +71,10 @@ export default function Robot(props: RobotProps): JSX.Element {
 
         // Play the third animation (index 2)
         if (gltf.animations.length > 2) {
-          const action = mixer.clipAction(gltf.animations[2], modelRobot);
+          const action = mixer.clipAction(
+            gltf.animations[RobotAnimation.Idle],
+            modelRobot
+          );
           action.play();
         }
 
