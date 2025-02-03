@@ -5,3 +5,55 @@
   pointer-events: none;
   z-index: 999;
 }
+
+.container {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+}
+
+.box {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  animation: bounce 4s ease infinite forwards;
+}
+
+.shadow {
+  position: relative;
+  width: 280px;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at center,
+    #ddddff 1%,
+    transparent 70%,
+    transparent
+  );
+  top: 105px;
+  border-radius: 50%;
+  animation: bounceOut 4s ease infinite forwards;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-24px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes bounceOut {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}
