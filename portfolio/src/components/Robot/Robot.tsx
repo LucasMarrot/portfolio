@@ -118,11 +118,11 @@ export default function Robot(props: RobotProps): JSX.Element {
     <div
       ref={containerRef}
       style={{
+        transform: `translate(${props.positionX}px, ${props.positionY}px)`,
+        transition: "transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
         width: "150px",
         height: "150px",
         position: "absolute",
-        top: `${props.positionY}px`,
-        left: `${props.positionX}px`,
       }}
     />
   );

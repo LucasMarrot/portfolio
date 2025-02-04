@@ -4,8 +4,8 @@ import Cursor from "./components/Cursor/Cursor";
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
       <Cursor />
+      <h1 style={{ color: "white", fontSize: 50 }}>Lucas</h1>
     </div>
   );
 }

@@ -1,11 +1,19 @@
 .circle {
-  --circle-size: 10px;
+  --circle-size: 12px;
+  --glow-color: rgba(255, 255, 255, 0.8);
   position: fixed;
   height: var(--circle-size);
   width: var(--circle-size);
-  background-color: white;
+  background: #a6e1fa;
   border-radius: 100%;
   top: calc(var(--circle-size) / 2 * -1);
   left: calc(var(--circle-size) / 2 * -1);
   pointer-events: none;
+  display: block;
+  filter: blur(1px);
+  box-shadow:
+    0 0 40px var(--glow-color),
+    0 0 20px var(--glow-color),
+    0 0 10px var(--glow-color);
+  mix-blend-mode: difference;
 }

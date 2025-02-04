@@ -10,20 +10,10 @@ export default function Cursor(): JSX.Element {
   const currentScale = useRef(0);
   const currentAngle = useRef(0);
   const SPEED = 0.1;
+  const ROBOT_SIZE = 200; // Taille du robot
+  const ROBOT_OFFSET = { x: -25, y: -50 }; // Offset par rapport au curseur
 
   const [robotPosition, setRobotPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.current.x = e.clientX;
-      mouse.current.y = e.clientY;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -64,10 +54,18 @@ export default function Cursor(): JSX.Element {
       }
 
       // MANAGE ROBOT
-      setRobotPosition({
-        x: circle.current.x + 15,
-        y: circle.current.y + 10,
-      });
+      let newX = circle.current.x + ROBOT_OFFSET.x;
+      let newY = circle.current.y + ROBOT_OFFSET.y;
+
+      // Ajuster la position pour garder le robot dans l'écran
+      const maxX = window.innerWidth - ROBOT_SIZE;
+      const maxY = window.innerHeight - ROBOT_SIZE;
+
+      // Limiter uniquement aux bords de l'écran
+      newX = Math.max(0, Math.min(maxX, newX));
+      newY = Math.max(0, Math.min(maxY, newY));
+
+      setRobotPosition({ x: newX, y: newY });
 
       requestAnimationFrame(tick);
     };
@@ -77,7 +75,7 @@ export default function Cursor(): JSX.Element {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y]);
 
   return (
     <>
