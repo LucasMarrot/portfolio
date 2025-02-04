@@ -3,6 +3,7 @@
   --glow-color: rgba(255, 255, 255, 0.8);
 
   position: fixed;
+  z-index: 9999;
   height: var(--circle-size);
   width: var(--circle-size);
   background: var(--primary-color);
@@ -21,6 +22,7 @@
   &.clickable {
     --circle-size: 24px;
     background: var(--primary-color);
+    mix-blend-mode: difference;
   }
 
   &.speak {

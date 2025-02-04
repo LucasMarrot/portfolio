@@ -1,4 +1,57 @@
 .interactive {
   width: fit-content;
   height: fit-content;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interactive::before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  left: -10px;
+  top: -10px;
+  background: transparent;
+  pointer-events: none;
+  box-shadow: 0 0 0 transparent;
+  transition: all 1s ease;
+  opacity: 0;
+}
+
+.interactive:hover::before {
+  opacity: 1;
+  animation: waveBorder 15s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+@keyframes waveBorder {
+  0% {
+    border-radius: 30% 70% 35% 65% / 30% 70% 35% 65%;
+    box-shadow: 0 0 10px var(--primary-color);
+  }
+  16.67% {
+    border-radius: 65% 35% 65% 35% / 35% 65% 35% 65%;
+    box-shadow: 0 0 15px 2px var(--primary-color);
+  }
+  33.33% {
+    border-radius: 35% 65% 35% 65% / 65% 35% 65% 35%;
+    box-shadow: 0 0 8px var(--primary-color);
+  }
+  50% {
+    border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
+    box-shadow: 0 0 12px 3px var(--primary-color);
+  }
+  66.67% {
+    border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+    box-shadow: 0 0 10px 1px var(--primary-color);
+  }
+  83.33% {
+    border-radius: 55% 45% 65% 35% / 35% 65% 45% 55%;
+    box-shadow: 0 0 14px 2px var(--primary-color);
+  }
+  100% {
+    border-radius: 30% 70% 35% 65% / 30% 70% 35% 65%;
+    box-shadow: 0 0 10px var(--primary-color);
+  }
 }
