@@ -9,12 +9,16 @@ type InteractiveObjectProps = {
   children: React.ReactNode;
   type: InteractiveType;
   text?: string;
+  style?: React.CSSProperties;
+  className?: string;
 };
 
 export default function InteractiveObject({
   children,
   type,
   text,
+  style,
+  className,
 }: InteractiveObjectProps): JSX.Element {
   const { setInteractiveState } = useInteractive();
   const divRef = React.useRef<HTMLDivElement>(null);
@@ -49,10 +53,11 @@ export default function InteractiveObject({
   return (
     <div
       ref={divRef}
-      className={`${styles.interactive}`}
+      className={`${styles.interactive} ${className}`}
       onClick={handleInteraction}
       data-interaction={type}
       data-text={text}
+      style={style}
     >
       {children}
     </div>

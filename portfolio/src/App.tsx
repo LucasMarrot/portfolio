@@ -4,6 +4,7 @@ import InteractiveObject from "./components/Common/InteractiveObject/Interactive
 import Cursor from "./components/Cursor/Cursor";
 import { CursorProvider } from "./contexts/CursorContext";
 import { InteractiveType } from "./contexts/InteractiveContext";
+import Lever from "./components/Lever/Lever";
 
 function App() {
   const circleRef = React.useRef<HTMLDivElement>(null);
@@ -14,6 +15,7 @@ function App() {
         <InteractiveObject
           type={InteractiveType.CLICK}
           text="Ouaw! Quel beau gosse !"
+          style={{ margin: "10px auto" }}
         >
           <h1
             style={{
@@ -23,6 +25,12 @@ function App() {
           >
             Lucas MARROT
           </h1>
+        </InteractiveObject>
+        <InteractiveObject
+          type={InteractiveType.CLICK}
+          className={"leverToggle"}
+        >
+          <Lever onPull={() => console.log("Lever pulled!")} />
         </InteractiveObject>
       </div>
     </CursorProvider>

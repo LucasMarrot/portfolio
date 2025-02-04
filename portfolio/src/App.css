@@ -4,3 +4,10 @@
   height: 100dvh;
   overflow: hidden;
 }
+
+.leverToggle {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
