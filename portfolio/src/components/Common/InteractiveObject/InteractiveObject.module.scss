@@ -17,12 +17,13 @@
   box-shadow: 0 0 0 transparent;
   transition: all 1s ease;
   opacity: 0;
+  animation: waveBorder 15s ease-in-out infinite paused;
 }
 
 .interactive:hover::before {
   opacity: 1;
-  animation: waveBorder 15s ease-in-out infinite;
   box-shadow: 0 0 10px var(--primary-color);
+  animation-play-state: running;
 }
 
 @keyframes waveBorder {
