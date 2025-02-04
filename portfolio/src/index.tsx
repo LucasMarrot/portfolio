@@ -5,30 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./contexts/ThemeProvider";
 import { InteractiveProvider } from "./contexts/InteractiveContext";
+import { SceneProvider } from "./contexts/SceneContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-export const toggleTheme = () => {
-  const theme =
-    document.documentElement.getAttribute("data-theme") === "dark"
-      ? "light"
-      : "dark";
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
-};
-
-export const initTheme = () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-};
-
 root.render(
   <React.StrictMode>
     <ThemeProvider>
       <InteractiveProvider>
-        <App />
+        <SceneProvider>
+          <App />
+        </SceneProvider>
       </InteractiveProvider>
     </ThemeProvider>
   </React.StrictMode>

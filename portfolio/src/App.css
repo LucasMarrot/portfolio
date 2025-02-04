@@ -5,9 +5,29 @@
   overflow: hidden;
 }
 
-.leverToggle {
+.leverContainer {
   position: absolute !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@keyframes earthquake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-5px, 5px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(5px, -5px) rotate(1deg);
+  }
+  75% {
+    transform: translate(-5px, -5px) rotate(-1deg);
+  }
+}
+
+.earthquake {
+  animation: earthquake 0.1s ease-in-out infinite;
 }
