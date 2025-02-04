@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, RefObject } from "react";
 import styles from "./Cursor.module.scss";
 import Robot from "../Robot/Robot";
 import {
@@ -6,9 +6,13 @@ import {
   useInteractive,
 } from "../../contexts/InteractiveContext";
 
-export default function Cursor(): JSX.Element {
+type CursorProps = {
+  circleRef: RefObject<HTMLDivElement>;
+};
+
+export default function Cursor(props: CursorProps): JSX.Element {
+  const { circleRef } = props;
   const { interactiveState } = useInteractive();
-  const circleRef = useRef<HTMLDivElement | null>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const previousMouse = useRef({ x: 0, y: 0 });
   const circle = useRef({ x: 0, y: 0 });
@@ -80,7 +84,7 @@ export default function Cursor(): JSX.Element {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y]);
+  }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y, circleRef]);
 
   return (
     <>
