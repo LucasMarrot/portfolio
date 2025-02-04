@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./contexts/ThemeProvider";
+import { InteractiveProvider } from "./contexts/InteractiveContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -24,11 +25,13 @@ export const initTheme = () => {
 };
 
 root.render(
-  <ThemeProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </ThemeProvider>
+  <React.StrictMode>
+    <ThemeProvider>
+      <InteractiveProvider>
+        <App />
+      </InteractiveProvider>
+    </ThemeProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

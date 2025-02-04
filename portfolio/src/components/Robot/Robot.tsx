@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import styles from "./Robot.module.scss";
 
 type RobotProps = {
   positionX: number;
   positionY: number;
+  speechText?: string;
 };
 
 enum RobotAnimation {
@@ -124,6 +126,10 @@ export default function Robot(props: RobotProps): JSX.Element {
         height: "150px",
         position: "absolute",
       }}
-    />
+    >
+      {props.speechText && (
+        <div className={styles.speechBubble}>{props.speechText}</div>
+      )}
+    </div>
   );
 }

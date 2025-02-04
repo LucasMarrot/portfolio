@@ -1,8 +1,13 @@
 import { useRef, useEffect, useState } from "react";
 import styles from "./Cursor.module.scss";
 import Robot from "../Robot/Robot";
+import {
+  InteractiveType,
+  useInteractive,
+} from "../../contexts/InteractiveContext";
 
 export default function Cursor(): JSX.Element {
+  const { interactiveState } = useInteractive();
   const circleRef = useRef<HTMLDivElement | null>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const previousMouse = useRef({ x: 0, y: 0 });
@@ -79,8 +84,19 @@ export default function Cursor(): JSX.Element {
 
   return (
     <>
-      <div ref={circleRef} className={styles.circle}></div>
-      <Robot positionX={robotPosition.x} positionY={robotPosition.y} />
+      <div
+        ref={circleRef}
+        className={`${styles.circle} ${interactiveState.type ? styles[interactiveState.type] : ""}`}
+      />
+      <Robot
+        positionX={robotPosition.x}
+        positionY={robotPosition.y}
+        speechText={
+          interactiveState.type === InteractiveType.SPEAK
+            ? interactiveState.text
+            : undefined
+        }
+      />
     </>
   );
 }
