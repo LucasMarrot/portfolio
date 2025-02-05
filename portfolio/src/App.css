@@ -11,6 +11,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.leverContainer2 {
+  position: absolute !important;
+  top: 70%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+.leverContainer3 {
+  position: absolute !important;
+  top: 70%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
 
 @keyframes earthquake {
   0%,

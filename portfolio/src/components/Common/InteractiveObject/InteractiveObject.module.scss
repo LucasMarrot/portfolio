@@ -1,3 +1,7 @@
+:root {
+  --wave-border-color: none;
+}
+
 .interactive {
   width: fit-content;
   height: fit-content;
@@ -22,37 +26,47 @@
 
 .interactive:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px var(--primary-color);
+  box-shadow: 0 0 10px var(--wave-border-color);
   animation-play-state: running;
+}
+
+[data-interaction="speak"].interactive:hover::before {
+  --wave-border-color: var(--speak-interactiion-color);
+}
+[data-interaction="clickable"].interactive:hover::before {
+  --wave-border-color: var(--click-interaction-color);
+}
+[data-interaction="all"].interactive:hover::before {
+  --wave-border-color: var(--all-interaction-color);
 }
 
 @keyframes waveBorder {
   0% {
     border-radius: 30% 70% 35% 65% / 30% 70% 35% 65%;
-    box-shadow: 0 0 10px var(--primary-color);
+    box-shadow: 0 0 10px var(--wave-border-color);
   }
   16.67% {
     border-radius: 65% 35% 65% 35% / 35% 65% 35% 65%;
-    box-shadow: 0 0 15px 2px var(--primary-color);
+    box-shadow: 0 0 15px 2px var(--wave-border-color);
   }
   33.33% {
     border-radius: 35% 65% 35% 65% / 65% 35% 65% 35%;
-    box-shadow: 0 0 8px var(--primary-color);
+    box-shadow: 0 0 8px var(--wave-border-color);
   }
   50% {
     border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
-    box-shadow: 0 0 12px 3px var(--primary-color);
+    box-shadow: 0 0 12px 3px var(--wave-border-color);
   }
   66.67% {
     border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
-    box-shadow: 0 0 10px 1px var(--primary-color);
+    box-shadow: 0 0 10px 1px var(--wave-border-color);
   }
   83.33% {
     border-radius: 55% 45% 65% 35% / 35% 65% 45% 55%;
-    box-shadow: 0 0 14px 2px var(--primary-color);
+    box-shadow: 0 0 14px 2px var(--wave-border-color);
   }
   100% {
     border-radius: 30% 70% 35% 65% / 30% 70% 35% 65%;
-    box-shadow: 0 0 10px var(--primary-color);
+    box-shadow: 0 0 10px var(--wave-border-color);
   }
 }

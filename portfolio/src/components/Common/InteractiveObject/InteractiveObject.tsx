@@ -24,37 +24,31 @@ export default function InteractiveObject({
   const divRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!divRef.current) return;
+    const element = divRef.current;
+    if (!element) return;
 
-      const rect = divRef.current.getBoundingClientRect();
-      const isInside =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
-
-      if (isInside) {
-        setInteractiveState({ type, text });
-      } else {
-        setInteractiveState({ type: null });
-      }
+    const handleMouseEnter = () => {
+      setInteractiveState({ type, text });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [type, text, setInteractiveState]);
+    const handleMouseLeave = () => {
+      setInteractiveState({ type: null });
+    };
 
-  function handleInteraction(): void {
-    //TODO: Add interaction logic
-    console.error("OnClick: Not implemented");
-  }
+    element.addEventListener("mouseenter", handleMouseEnter);
+    element.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      element.removeEventListener("mouseenter", handleMouseEnter);
+      element.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [type, text, setInteractiveState]);
 
   return (
     <div
       ref={divRef}
       className={`${styles.interactive} ${className}`}
-      onClick={handleInteraction}
+      onClick={() => {}} // TODO: Add interaction logic
       data-interaction={type}
       data-text={text}
       style={style}

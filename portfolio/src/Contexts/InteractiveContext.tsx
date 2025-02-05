@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 export enum InteractiveType {
   SPEAK = "speak",
   CLICK = "clickable",
+  ALL = "all",
 }
 
 type InteractiveState = {

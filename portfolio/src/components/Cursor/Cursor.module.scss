@@ -17,17 +17,26 @@
     0 0 40px var(--glow-color),
     0 0 20px var(--glow-color),
     0 0 10px var(--glow-color);
-  mix-blend-mode: difference;
+  mix-blend-mode: screen;
 
   &.clickable {
     --circle-size: 24px;
-    background: var(--primary-color);
+    background: var(--click-interaction-color);
+    filter: blur(2px);
     mix-blend-mode: difference;
   }
 
   &.speak {
-    --circle-size: 16px;
-    background: var(--accent-color);
+    --circle-size: 24px;
+    background: var(--speak-interaction-color);
     filter: blur(2px);
+    mix-blend-mode: hard-light;
+  }
+
+  &.all {
+    --circle-size: 24px;
+    background: var(--all-interaction-color);
+    filter: blur(2px);
+    mix-blend-mode: exclusion;
   }
 }

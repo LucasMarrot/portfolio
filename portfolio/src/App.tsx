@@ -13,7 +13,8 @@ function App() {
       <div className="App">
         <Cursor circleRef={circleRef} />
         <InteractiveObject
-          type={InteractiveType.CLICK}
+          type={InteractiveType.SPEAK}
+          text="Hello !"
           className={"leverContainer"}
         >
           <Lever />
