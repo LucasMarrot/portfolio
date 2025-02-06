@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import styles from "./Robot.module.scss";
+import { isSafari } from "../../utils/Utils";
 
 type RobotProps = {
   positionX: number;
@@ -121,7 +122,9 @@ export default function Robot(props: RobotProps): JSX.Element {
       ref={containerRef}
       style={{
         transform: `translate(${props.positionX}px, ${props.positionY}px)`,
-        transition: "transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
+        transition: isSafari()
+          ? "none"
+          : "transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
         width: "150px",
         height: "150px",
         position: "absolute",
