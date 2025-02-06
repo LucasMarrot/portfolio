@@ -32,14 +32,14 @@ export default function Lever({
       setSceneState("earthquake");
 
       document.body.classList.add("earthquake");
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       document.body.classList.remove("earthquake");
 
       setIsExploding(true);
       setSceneState("explosion");
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      setSceneState("reveal");
+      setSceneState("completed");
     }
   };
 

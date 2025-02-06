@@ -1,11 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
-type SceneState =
-  | "initial"
-  | "earthquake"
-  | "explosion"
-  | "reveal"
-  | "completed";
+type SceneState = "initial" | "earthquake" | "explosion" | "completed";
 
 type SceneContextType = {
   sceneState: SceneState;
@@ -22,7 +17,7 @@ export function SceneProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   React.useEffect(() => {
-    if (sceneState === "reveal") {
+    if (sceneState === "completed") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   }, [sceneState]);

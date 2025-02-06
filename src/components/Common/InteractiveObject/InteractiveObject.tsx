@@ -41,6 +41,7 @@ export default function InteractiveObject({
     return () => {
       element.removeEventListener("mouseenter", handleMouseEnter);
       element.removeEventListener("mouseleave", handleMouseLeave);
+      setInteractiveState({ type: null });
     };
   }, [type, text, setInteractiveState]);
 
