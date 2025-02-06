@@ -1,0 +1,50 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow uniquement sur la branche main
+
+permissions:
+  contents: write  # Nécessaire pour push les fichiers
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if github-pages branch exists
+        run: |
+          if ! git ls-remote --exit-code --heads origin github-pages; then
+            echo "❌ La branche 'github-pages' n'existe pas. Crée-la d'abord manuellement."
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Récupère la branche github-pages et la met à jour
+          git fetch origin github-pages
+          git checkout github-pages
+
+          # Supprime tous les fichiers sauf .git
+          find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
+
+          # Déplace les fichiers build dans la racine du repo
+          mv build/* .
+
+          # Ajoute et commit les fichiers
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push origin github-pages --force
