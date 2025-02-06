@@ -22,6 +22,7 @@ export default function InteractiveObject({
 }: InteractiveObjectProps): JSX.Element {
   const { setInteractiveState } = useInteractive();
   const divRef = React.useRef<HTMLDivElement>(null);
+  const [isTouched, setIsTouched] = React.useState(false);
 
   React.useEffect(() => {
     const element = divRef.current;
@@ -45,11 +46,22 @@ export default function InteractiveObject({
     };
   }, [type, text, setInteractiveState]);
 
+  const handleTouch = (e: React.TouchEvent) => {
+    if (!isTouched) {
+      e.preventDefault();
+      setIsTouched(true);
+    } else {
+      setIsTouched(false);
+      setInteractiveState({ type: null });
+    }
+  };
+
   return (
     <div
       ref={divRef}
       className={`${styles.interactive} ${className}`}
-      onClick={() => {}} // TODO: Add interaction logic
+      onClick={() => {}} // TODO : Add the good action here
+      onTouchEnd={handleTouch}
       data-interaction={type}
       data-text={text}
       style={style}

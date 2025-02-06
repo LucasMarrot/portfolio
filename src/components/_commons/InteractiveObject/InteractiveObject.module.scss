@@ -2,6 +2,10 @@
   --wave-border-color: none;
 }
 
+.oneTouchOnMobile {
+  pointer-events: none;
+}
+
 .interactive {
   width: fit-content;
   height: fit-content;
