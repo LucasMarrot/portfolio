@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.ad62fff0.css",
-    "main.js": "/portfolio/static/js/main.dc89e0ae.js",
+    "main.css": "/portfolio/static/css/main.3c0d28c8.css",
+    "main.js": "/portfolio/static/js/main.098f389d.js",
     "static/js/453.1407b060.chunk.js": "/portfolio/static/js/453.1407b060.chunk.js",
     "static/media/Rubik-VariableFont_wght.ttf": "/portfolio/static/media/Rubik-VariableFont_wght.3a4acc0356c6ea73f2c3.ttf",
     "static/media/Rubik-Italic-VariableFont_wght.ttf": "/portfolio/static/media/Rubik-Italic-VariableFont_wght.d83d9d961a7aaca406c2.ttf",
@@ -10,12 +10,12 @@
     "static/media/Rubik-Regular.ttf": "/portfolio/static/media/Rubik-Regular.55fa11cdc8b9a3ee842f.ttf",
     "static/media/Rubik-Light.ttf": "/portfolio/static/media/Rubik-Light.9d2ccd264dc61b954019.ttf",
     "index.html": "/portfolio/index.html",
-    "main.ad62fff0.css.map": "/portfolio/static/css/main.ad62fff0.css.map",
-    "main.dc89e0ae.js.map": "/portfolio/static/js/main.dc89e0ae.js.map",
+    "main.3c0d28c8.css.map": "/portfolio/static/css/main.3c0d28c8.css.map",
+    "main.098f389d.js.map": "/portfolio/static/js/main.098f389d.js.map",
     "453.1407b060.chunk.js.map": "/portfolio/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad62fff0.css",
-    "static/js/main.dc89e0ae.js"
+    "static/css/main.3c0d28c8.css",
+    "static/js/main.098f389d.js"
   ]
 }
