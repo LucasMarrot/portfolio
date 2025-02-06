@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./contexts/ThemeProvider";
 import { InteractiveProvider } from "./contexts/InteractiveContext";
 import { SceneProvider } from "./contexts/SceneContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,11 +15,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <InteractiveProvider>
-        <SceneProvider>
-          <App />
-        </SceneProvider>
-      </InteractiveProvider>
+      <LanguageProvider>
+        <InteractiveProvider>
+          <SceneProvider>
+            <App />
+          </SceneProvider>
+        </InteractiveProvider>
+      </LanguageProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
