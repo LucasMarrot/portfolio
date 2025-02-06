@@ -1,11 +1,11 @@
 import React from "react";
-import InteractiveObject from "../Common/InteractiveObject/InteractiveObject";
+import InteractiveObject from "../../_common/InteractiveObject/InteractiveObject";
 import {
   InteractiveType,
   useInteractive,
-} from "../../contexts/InteractiveContext";
-import Lever from "../Lever/Lever";
-import { useScene } from "../../contexts/SceneContext";
+} from "../../../contexts/InteractiveContext";
+import Lever from "../../Lever/Lever";
+import { useScene } from "../../../contexts/SceneContext";
 import styles from "./InitScene.module.scss";
 
 interface InitSceneProps {
