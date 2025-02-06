@@ -40,6 +40,7 @@ export default function Lever({
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       setSceneState("completed");
+      localStorage.setItem("theme", "dark");
     }
   };
 

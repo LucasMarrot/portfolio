@@ -1,0 +1,78 @@
+.particlesContainer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.circleContainer {
+  position: absolute;
+  transform: translateY(-10vh);
+}
+
+.circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(
+    var(--primary-color),
+    var(--primary-color) 10%,
+    transparent 56%
+  );
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale3d(0.4, 0.4, 1);
+  }
+  50% {
+    transform: scale3d(2.2, 2.2, 1);
+  }
+  100% {
+    transform: scale3d(0.4, 0.4, 1);
+  }
+}
+
+@for $i from 1 through 200 {
+  .particle-#{$i} {
+    $size: random(8) + 1;
+    width: #{$size}px;
+    height: #{$size}px;
+
+    $startY: random(10) + 100;
+    $startX: random(100);
+    $endY: -($startY + random(30));
+
+    animation: move-#{$i} #{28000 + random(9000)}ms linear infinite;
+    animation-delay: #{random(37000)}ms;
+
+    .circle {
+      animation:
+        fade 200ms infinite,
+        scale 2s infinite;
+      animation-delay: #{random(4000)}ms;
+    }
+
+    @keyframes move-#{$i} {
+      from {
+        transform: translate3d(#{$startX}vw, #{$startY}vh, 0);
+      }
+      to {
+        transform: translate3d(#{$startX}vw, #{$endY}vh, 0);
+      }
+    }
+  }
+}

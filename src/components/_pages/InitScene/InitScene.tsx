@@ -1,5 +1,5 @@
 import React from "react";
-import InteractiveObject from "../../_common/InteractiveObject/InteractiveObject";
+import InteractiveObject from "../../_commons/InteractiveObject/InteractiveObject";
 import {
   InteractiveType,
   useInteractive,

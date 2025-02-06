@@ -7,7 +7,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/_pages/Home/Home";
 
 function App() {
-  const [isInitComplete, setIsInitComplete] = React.useState(false);
+  const [isInitComplete, setIsInitComplete] = React.useState(
+    localStorage.getItem("theme") !== "init"
+  );
   const circleRef = React.useRef<HTMLDivElement>(null);
 
   return (
