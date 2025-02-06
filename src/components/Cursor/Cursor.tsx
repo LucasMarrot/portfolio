@@ -86,8 +86,6 @@ export default function Cursor(props: CursorProps): JSX.Element {
     };
   }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y, circleRef]);
 
-  console.log(interactiveState.type);
-
   return (
     <>
       <div

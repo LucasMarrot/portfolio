@@ -51,7 +51,7 @@ export default function Robot(props: RobotProps): JSX.Element {
     // Load 3D Model
     const loader = new GLTFLoader();
     loader.load(
-      "/models/robot.glb", // Path to your model file
+      process.env.PUBLIC_URL + "/models/robot.glb", // Path to your model file
       (gltf) => {
         const modelRobot = gltf.scene;
         modelRobot.position.set(0, 0, 0); // Position the model in front of the camera
