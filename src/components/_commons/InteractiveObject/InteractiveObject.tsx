@@ -26,10 +26,10 @@ export default function InteractiveObject({
 
   React.useEffect(() => {
     // Manage the different states of the interactive object depending on mobile or desktop
-    // Desktop
     const element = divRef.current;
     if (!element) return;
 
+    // Desktop
     const handleMouseEnter = () => {
       setTimeout(() => {
         if (isTouched) return;
