@@ -11,6 +11,7 @@
   height: fit-content;
   position: relative;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
 }
 
 .interactive::before {
@@ -25,13 +26,14 @@
   box-shadow: 0 0 0 transparent;
   transition: all 1s ease;
   opacity: 0;
-  animation: waveBorder 15s ease-in-out infinite paused;
+  will-change: opacity, border-radius;
+  transition: opacity 0.3s ease;
+  animation: none;
 }
 
 .interactive:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px var(--wave-border-color);
-  animation-play-state: running;
+  animation: waveBorder 15s ease-in-out infinite;
 }
 
 [data-interaction="speak"].interactive:hover::before {
