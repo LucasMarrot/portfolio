@@ -59,10 +59,10 @@
 
   /* Dark theme (default) */
   --primary-color: #a6e1fa;
-  --speak-interactiion-color: #59cd90;
+  --speak-interaction-color: #59cd90;
   --click-interaction-color: #fac05e;
   --all-interaction-color: #ee6352;
-  --bg-color: #021b27;
+  --bg-color: #010e13;
   --text-color: #ecf8fe;
   /* --surface-color: #1a1a1a;
   --shadow-color: rgba(0, 0, 0, 0.3);
@@ -72,11 +72,12 @@
 
 /* Light theme */
 [data-theme="light"] {
-  --primary-color: #a6e1fa;
-  --speak-interactiion-color: #bfcc94;
-  --click-interaction-color: #e6aace;
-  --bg-color: #ffffff;
-  --text-color: #1a1a1a;
+  --primary-color: #0a7cae;
+  --speak-interaction-color: #267e4f;
+  --click-interaction-color: #8b5904;
+  --all-interaction-color: #951e0f;
+  --bg-color: #c5ecfc;
+  --text-color: #ecf8fe;
   /* --surface-color: #f5f5f5;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --hover-color: #95ccf5;
@@ -89,7 +90,7 @@
   --speak-interaction-color: #59cd90;
   --click-interaction-color: #fac05e;
   --all-interaction-color: #ee6352;
-  --bg-color: #010e13;
+  --bg-color: #000000;
   --spotlight-color: rgba(255, 255, 255, 0.05);
   --spotlight-size: 200px;
 }
