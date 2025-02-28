@@ -37,7 +37,7 @@
 }
 
 [data-interaction="speak"].interactive:hover::before {
-  --wave-border-color: var(--speak-interactiion-color);
+  --wave-border-color: var(--speak-interaction-color);
 }
 [data-interaction="clickable"].interactive:hover::before {
   --wave-border-color: var(--click-interaction-color);
