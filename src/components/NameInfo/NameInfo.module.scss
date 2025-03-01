@@ -34,7 +34,7 @@ $shadow-color-in-secondary: var(--click-interaction-color);
     9px 7px 1px $shadow-color-out-primary;
 
   span {
-    display: block;
+    display: inline-block;
     position: relative;
 
     &:before {
@@ -50,10 +50,75 @@ $shadow-color-in-secondary: var(--click-interaction-color);
 
     &:nth-child(1) {
       padding-right: 2.25rem;
+      transform: translateX(-200%);
+      animation:
+        slideInLeft 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) 1s forwards,
+        float 4s ease-in-out infinite 2.8s;
     }
-
     &:nth-child(2) {
       padding-left: 2.25rem;
+      transform: translateX(200%);
+      animation:
+        slideInRight 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) 1.5s forwards,
+        float 4s ease-in-out infinite 3.2s;
     }
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-200%) skewX(-20deg);
+    filter: blur(2px);
+  }
+  80% {
+    transform: translateX(10%) skewX(-10deg);
+    filter: blur(1px);
+  }
+  90% {
+    transform: translateX(-5%) skewX(1deg);
+    filter: blur(0.5px);
+  }
+  95% {
+    transform: translateX(2%) skewX(-0.5deg);
+    filter: blur(0.2px);
+  }
+  100% {
+    transform: translateX(0) skewX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(200%) skewX(20deg);
+    filter: blur(2px);
+  }
+  80% {
+    transform: translateX(-10%) skewX(10deg);
+    filter: blur(1px);
+  }
+  90% {
+    transform: translateX(5%) skewX(-1deg);
+    filter: blur(0.5px);
+  }
+  95% {
+    transform: translateX(-2%) skewX(0.5deg);
+    filter: blur(0.2px);
+  }
+  100% {
+    transform: translateX(0) skewX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

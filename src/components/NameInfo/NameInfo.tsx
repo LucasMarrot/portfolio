@@ -4,6 +4,17 @@ import InteractiveObject from "../_commons/InteractiveObject/InteractiveObject";
 import { InteractiveType } from "../../contexts/InteractiveContext";
 
 export default function NameInfo(): JSX.Element {
+  const [animationCompleted, setAnimationCompleted] = React.useState(false);
+
+  React.useEffect(() => {
+    const animationDuration = 3200;
+    const timer = setTimeout(() => {
+      setAnimationCompleted(true);
+    }, animationDuration);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <InteractiveObject
       type={InteractiveType.SPEAK}
@@ -14,6 +25,7 @@ export default function NameInfo(): JSX.Element {
         left: "50%",
         transform: "translate(-50%, -50%)",
       }}
+      isInteractionEnabled={animationCompleted}
     >
       <div className={styles.titleWrapper}>
         <h1 className={styles.sweetTitle}>
