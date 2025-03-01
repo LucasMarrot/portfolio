@@ -7,8 +7,8 @@ export default function NameInfo(): JSX.Element {
   const [animationCompleted, setAnimationCompleted] = React.useState(false);
 
   React.useEffect(() => {
-    const animationDuration = 3200;
-    const timer = setTimeout(() => {
+    const animationDuration: number = 3200;
+    const timer: NodeJS.Timeout = setTimeout(() => {
       setAnimationCompleted(true);
     }, animationDuration);
 
