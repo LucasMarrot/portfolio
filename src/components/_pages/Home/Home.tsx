@@ -1,13 +1,13 @@
-import { useStrings } from "../../../customHooks/useStrings";
+import NameInfo from "../../NameInfo/NameInfo";
 import Particles from "../../Particles/Particles";
+import ThemeToggle from "../../ThemeToggle/ThemeToggle";
 
-export default function Home() {
-  const strings = useStrings();
-
+export default function Home(): JSX.Element {
   return (
     <main>
       <Particles />
-      <h1>{strings.title}</h1>
+      <NameInfo />
+      <ThemeToggle />
     </main>
   );
 }
