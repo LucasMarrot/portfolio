@@ -11,6 +11,7 @@ type InteractiveObjectProps = {
   text?: string;
   style?: React.CSSProperties;
   className?: string;
+  isInteractionEnabled?: boolean;
 };
 
 export default function InteractiveObject({
@@ -19,17 +20,22 @@ export default function InteractiveObject({
   text,
   style,
   className,
+  isInteractionEnabled = true,
 }: InteractiveObjectProps): JSX.Element {
   const { setInteractiveState } = useInteractive();
   const divRef = React.useRef<HTMLDivElement>(null);
   const [isTouched, setIsTouched] = React.useState(false);
 
   React.useEffect(() => {
-    // Manage the different states of the interactive object depending on mobile or desktop
     const element = divRef.current;
     if (!element) return;
+    if (!isInteractionEnabled) {
+      element.style.pointerEvents = "none";
+      return;
+    }
 
-    // Desktop
+    element.style.pointerEvents = "auto";
+
     const handleMouseEnter = () => {
       setTimeout(() => {
         if (isTouched) return;
@@ -47,7 +53,6 @@ export default function InteractiveObject({
     element.addEventListener("mouseenter", handleMouseEnter);
     element.addEventListener("mouseleave", handleMouseLeave);
 
-    // Mobile
     const handleTouchStart = (e: TouchEvent) => {
       if (!isTouched) {
         element.querySelectorAll("*").forEach((child) => {
@@ -80,7 +85,7 @@ export default function InteractiveObject({
       element.removeEventListener("touchstart", handleTouchStart);
       setInteractiveState({ type: null });
     };
-  }, [type, text, setInteractiveState, isTouched]);
+  }, [type, text, setInteractiveState, isTouched, isInteractionEnabled]);
 
   return (
     <div
