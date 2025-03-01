@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -128,6 +129,8 @@ export default function Robot(props: RobotProps): JSX.Element {
         width: "150px",
         height: "150px",
         position: "absolute",
+        zIndex: 9999,
+        pointerEvents: "none",
       }}
     >
       {props.speechText && (
