@@ -1,0 +1,49 @@
+.liste {
+  display: inline-flex;
+  border-radius: 20px;
+
+  &:is(:not(:hover)) > div > button:not(:active):not(.active) {
+    --distance: -5px;
+  }
+  &:is(:hover) > div > button:not(:active):not(.active) {
+    --distance: -6px;
+  }
+
+  &:is(:not(:hover)) > div > button.active {
+    --distance: -2px;
+  }
+  &:is(:hover) > div > button.active {
+    --distance: -2px;
+  }
+
+  &:nth-child(1) {
+    background: var(--speak-interaction-color);
+  }
+  &:nth-child(2) {
+    background: var(--click-interaction-color);
+  }
+  &:nth-child(3) {
+    background: var(--all-interaction-color);
+  }
+}
+
+.button {
+  appearance: none;
+  outline: none;
+  font-size: 3vmin;
+  border: 3px solid var(--bg-color);
+  background: var(--text-color);
+  color: var(--bg-color);
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: inherit;
+
+  user-select: none;
+
+  transform: translateX(var(--distance)) translateY(var(--distance));
+
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: transform;
+    transition: transform 0.2s ease;
+  }
+}
