@@ -18,12 +18,15 @@
 
   &:nth-child(1) {
     background: var(--speak-interaction-color);
+    animation: float 4s ease-in-out infinite;
   }
   &:nth-child(2) {
     background: var(--click-interaction-color);
+    animation: float 4s ease-in-out infinite 0.3s;
   }
   &:nth-child(3) {
     background: var(--all-interaction-color);
+    animation: float 4s ease-in-out infinite 0.8s;
   }
 }
 
@@ -45,5 +48,17 @@
   @media (prefers-reduced-motion: no-preference) {
     will-change: transform;
     transition: transform 0.2s ease;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
