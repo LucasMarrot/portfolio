@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.navMenu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.toggles {
+  flex: 0;
+}
