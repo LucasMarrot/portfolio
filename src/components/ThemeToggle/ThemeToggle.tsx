@@ -8,10 +8,7 @@ export default function ThemeToggle(): JSX.Element {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <InteractiveObject
-      type={InteractiveType.ALL}
-      text={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-    >
+    <InteractiveObject type={InteractiveType.CLICK}>
       <button
         onClick={toggleTheme}
         className={styles.themeToggle}

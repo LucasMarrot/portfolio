@@ -5,11 +5,15 @@ import { CursorProvider } from "./contexts/CursorContext";
 import InitScene from "./components/_pages/InitScene/InitScene";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/_pages/Home/Home";
+import Projects from "./components/_pages/Projects/Projects";
 
 function App() {
-  const [isInitComplete, setIsInitComplete] = React.useState(
-    localStorage.getItem("theme") !== "init"
-  );
+  const [isInitComplete, setIsInitComplete] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsInitComplete(localStorage.getItem("theme") !== "init" || false);
+  }, []);
+
   const circleRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -28,7 +32,7 @@ function App() {
                 )
               }
             />
-            <Route path="/projects" element={<></>} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<></>} />
           </Routes>
         </BrowserRouter>
