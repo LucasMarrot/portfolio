@@ -33,7 +33,7 @@ const NavButton = (props: TNavButtonProps): JSX.Element => {
   };
 
   return (
-    <li className={styles.liste}>
+    <li className={styles.list}>
       <InteractiveObject
         type={InteractiveType.CLICK}
         isInteractionEnabled={!isActive}

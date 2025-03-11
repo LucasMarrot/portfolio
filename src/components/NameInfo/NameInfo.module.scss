@@ -50,14 +50,14 @@ $shadow-color-in-secondary: var(--click-interaction-color);
 
     &:nth-child(1) {
       padding-right: 2.25rem;
-      transform: translateX(-200%);
+      transform: translateX(-100dvw);
       animation:
         slideInLeft 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) 1s forwards,
         float 4s ease-in-out infinite 2.8s;
     }
     &:nth-child(2) {
       padding-left: 2.25rem;
-      transform: translateX(200%);
+      transform: translateX(100dvw);
       animation:
         slideInRight 1.5s cubic-bezier(0.36, 0, 0.66, -0.56) 1.5s forwards,
         float 4s ease-in-out infinite 3.2s;
