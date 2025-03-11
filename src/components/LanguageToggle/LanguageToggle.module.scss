@@ -1,0 +1,13 @@
+.languageToggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  color: var(--text-color);
+  cursor: inherit;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

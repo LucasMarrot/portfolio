@@ -1,4 +1,3 @@
-import React from "react";
 import { useTheme } from "../../contexts/ThemeProvider";
 import styles from "./ThemeToggle.module.scss";
 import InteractiveObject from "../_commons/InteractiveObject/InteractiveObject";

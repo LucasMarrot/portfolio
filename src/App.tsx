@@ -12,7 +12,7 @@ function App() {
 
   React.useEffect(() => {
     setIsInitComplete(localStorage.getItem("theme") !== "init" || false);
-  }, []);
+  }, [isInitComplete]);
 
   const circleRef = React.useRef<HTMLDivElement>(null);
 
