@@ -1,16 +1,12 @@
 .navButton {
-  position: absolute;
-  top: 50%;
   width: fit-content;
   height: fit-content;
   max-width: calc(100dvw - 10vmin);
   max-height: calc(100dvh - 10vmin);
-  transform: translateY(-50%);
   background: none;
   border: none;
   color: var(--text-color);
   cursor: inherit;
-  z-index: 10;
 }
 
 .navButton svg {
@@ -20,11 +16,9 @@
 }
 
 .navButton:first-of-type {
-  left: 5vmax;
   filter: drop-shadow(5px 5px 0px var(--click-interaction-color));
 }
 
 .navButton:last-of-type {
-  right: 5vmax;
   filter: drop-shadow(-5px 5px 0px var(--click-interaction-color));
 }
