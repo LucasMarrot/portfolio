@@ -1,0 +1,69 @@
+import React, { useRef, useState, useEffect } from "react";
+import styles from "./ProjectCarousel.module.scss";
+
+export type TProject = {
+  id: string;
+  backgroundColor: string;
+  content: React.ReactNode;
+};
+
+interface TProjectCarouselProps {
+  projects: TProject[];
+}
+
+export const ProjectCarousel = (props: TProjectCarouselProps): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const scrollLeft = containerRef.current.scrollLeft;
+    const width = containerRef.current.offsetWidth;
+    const index = Math.round(scrollLeft / width);
+    setActiveIndex(index);
+  };
+
+  const scrollToSlide = (index: number) => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        left: containerRef.current.offsetWidth * index,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const ref = containerRef.current;
+    if (!ref) return;
+
+    ref.addEventListener("scroll", handleScroll);
+    return () => ref.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className={styles.carouselWrapper}>
+      <div ref={containerRef} className={styles.carouselContainer}>
+        {props.projects.map((project) => (
+          <div
+            key={project.id}
+            className={styles.carouselItem}
+            style={{ backgroundColor: project.backgroundColor }}
+          >
+            <div className={styles.contentBox}>{project.content}</div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.indicators}>
+        {props.projects.map((_, index) => (
+          <div
+            key={index}
+            className={`${styles.indicator} ${
+              activeIndex === index ? styles.activeIndicator : ""
+            }`}
+            onClick={() => scrollToSlide(index)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
