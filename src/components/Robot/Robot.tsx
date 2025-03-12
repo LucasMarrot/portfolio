@@ -8,6 +8,7 @@ import { isSafari } from "../../utils/Utils";
 type RobotProps = {
   positionX: number;
   positionY: number;
+  path: string;
   speechText?: string;
 };
 
@@ -22,6 +23,10 @@ enum RobotAnimation {
 export default function Robot(props: RobotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
+  const isProjects: boolean = React.useMemo(
+    () => props.path.includes("projects"),
+    [props.path]
+  );
 
   React.useEffect(() => {
     if (!containerRef.current) return;
@@ -122,7 +127,9 @@ export default function Robot(props: RobotProps): JSX.Element {
     <div
       ref={containerRef}
       style={{
-        transform: `translate(${props.positionX}px, ${props.positionY}px)`,
+        transform: !isProjects
+          ? `translate(${props.positionX}px, ${props.positionY}px)`
+          : "translate(0, calc(100dvh - 100%))",
         transition: isSafari()
           ? "none"
           : "transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
