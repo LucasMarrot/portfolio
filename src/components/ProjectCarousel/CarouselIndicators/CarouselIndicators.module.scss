@@ -1,0 +1,31 @@
+.indicators {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.indicator {
+  width: 4px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  margin: 5px;
+  transition:
+    all 0.5s ease-in-out,
+    transform 0.2s ease-in-out;
+
+  &:hover:not(.activeIndicator) {
+    transform: scale(2);
+  }
+}
+
+.activeIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-color);
+}

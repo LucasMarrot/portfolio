@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "./ProjectCarousel.module.scss";
 import { CarouselArrowButton } from "./CarouselArrowButton/CarouselArrowButton";
+import { CarouselIndicators } from "./CarouselIndicators/CarouselIndicators";
 
 export type TProject = {
   id: string;
@@ -66,17 +67,11 @@ export const ProjectCarousel = (props: TProjectCarouselProps): JSX.Element => {
           scrollToSlide={scrollToSlide}
         />
       </div>
-      <div className={styles.indicators}>
-        {props.projects.map((_, index) => (
-          <div
-            key={index}
-            className={`${styles.indicator} ${
-              activeIndex === index && styles.activeIndicator
-            }`}
-            onClick={() => scrollToSlide(index)}
-          />
-        ))}
-      </div>
+      <CarouselIndicators
+        scrollToSlide={scrollToSlide}
+        projects={props.projects}
+        activeIndex={activeIndex}
+      />
     </div>
   );
 };
