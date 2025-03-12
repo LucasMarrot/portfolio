@@ -24,10 +24,12 @@
   background: transparent;
   pointer-events: none;
   box-shadow: 0 0 0 transparent;
-  transition: all 1s ease;
+  transition:
+    all 1s ease,
+    opacity 0.3s ease;
+  filter: drop-shadow(3px 1px 0px var(--wave-border-color));
   opacity: 0;
   will-change: opacity, border-radius;
-  transition: opacity 0.3s ease;
   animation: none;
 }
 
