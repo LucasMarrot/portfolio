@@ -1,4 +1,4 @@
-import { TProject } from "../ProjectCarousel";
+import { TProject } from "../ProjectsCarousel";
 import styles from "./CarouselArrowButton.module.scss";
 
 type TCarouselArrowButtonProps = {

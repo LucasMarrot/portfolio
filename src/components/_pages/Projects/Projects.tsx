@@ -1,8 +1,8 @@
 import Header from "../../Header/Header";
 import {
-  ProjectCarousel,
+  ProjectsCarousel,
   TProject,
-} from "../../ProjectCarousel/ProjectCarousel";
+} from "../../ProjectsCarousel/ProjectsCarousel";
 
 export default function Projects(): JSX.Element {
   const projects: TProject[] = [
@@ -25,7 +25,7 @@ export default function Projects(): JSX.Element {
   return (
     <main>
       <Header />
-      <ProjectCarousel projects={projects} />
+      <ProjectsCarousel projects={projects} />
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import styles from "./ProjectCarousel.module.scss";
+import styles from "./ProjectsCarousel.module.scss";
 import { CarouselArrowButton } from "./CarouselArrowButton/CarouselArrowButton";
 import { CarouselIndicators } from "./CarouselIndicators/CarouselIndicators";
 
@@ -9,11 +9,13 @@ export type TProject = {
   content: React.ReactNode;
 };
 
-interface TProjectCarouselProps {
+interface TProjectsCarouselProps {
   projects: TProject[];
 }
 
-export const ProjectCarousel = (props: TProjectCarouselProps): JSX.Element => {
+export const ProjectsCarousel = (
+  props: TProjectsCarouselProps
+): JSX.Element => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
