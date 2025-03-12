@@ -15,7 +15,6 @@ const NavButton = (props: TNavButtonProps): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
   const isActive: boolean = location.pathname === props.path;
-  const isHome: boolean = location.pathname === "/";
 
   const handleClick = (): void => {
     if (!isActive) {
@@ -34,7 +33,7 @@ const NavButton = (props: TNavButtonProps): JSX.Element => {
   };
 
   return (
-    <li className={`${styles.list} ${isHome ? styles.home : ""}`}>
+    <li className={styles.list}>
       <InteractiveObject
         type={InteractiveType.CLICK}
         isInteractionEnabled={!isActive}
