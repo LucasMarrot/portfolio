@@ -6,7 +6,7 @@
   z-index: 9999;
   height: var(--circle-size);
   width: var(--circle-size);
-  background: var(--primary-color);
+  background: var(--cursor-color);
   border-radius: 100%;
   top: calc(var(--circle-size) / 2 * -1);
   left: calc(var(--circle-size) / 2 * -1);
@@ -17,7 +17,6 @@
     0 0 40px var(--glow-color),
     0 0 20px var(--glow-color),
     0 0 10px var(--glow-color);
-  mix-blend-mode: screen;
 
   &.clickable {
     --circle-size: 24px;
