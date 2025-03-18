@@ -1,6 +1,6 @@
 import { InteractiveType } from "../../../contexts/InteractiveContext";
 import InteractiveObject from "../../_commons/InteractiveObject/InteractiveObject";
-import { TProject } from "../ProjectsCarousel";
+import { TProject } from "../CarouselProject/CarouselProject";
 import styles from "./CarouselArrowButton.module.scss";
 
 type TCarouselArrowButtonProps = {

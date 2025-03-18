@@ -1,8 +1,6 @@
 import Header from "../../Header/Header";
-import {
-  ProjectsCarousel,
-  TProject,
-} from "../../ProjectsCarousel/ProjectsCarousel";
+import { TProject } from "../../ProjectsCarousel/CarouselProject/CarouselProject";
+import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
 
 export default function Projects(): JSX.Element {
   const projects: TProject[] = [

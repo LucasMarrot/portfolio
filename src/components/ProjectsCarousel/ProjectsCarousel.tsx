@@ -1,23 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import styles from "./ProjectsCarousel.module.scss";
 import { CarouselArrowButton } from "./CarouselArrowButton/CarouselArrowButton";
 import { CarouselIndicators } from "./CarouselIndicators/CarouselIndicators";
+import { CarouselProject, TProject } from "./CarouselProject/CarouselProject";
 
-export type TProject = {
-  id: string;
-  backgroundColor: string;
-  content: React.ReactNode;
-};
-
-interface TProjectsCarouselProps {
+type TProjectsCarouselProps = {
   projects: TProject[];
-}
+};
 
 export const ProjectsCarousel = (
   props: TProjectsCarouselProps
 ): JSX.Element => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
   const handleScroll = () => {
     if (!containerRef.current) return;
@@ -36,7 +31,7 @@ export const ProjectsCarousel = (
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const ref = containerRef.current;
     if (!ref) return;
 
@@ -54,13 +49,7 @@ export const ProjectsCarousel = (
           scrollToSlide={scrollToSlide}
         />
         {props.projects.map((project) => (
-          <div
-            key={project.id}
-            className={styles.carouselItem}
-            style={{ backgroundColor: project.backgroundColor }}
-          >
-            <div className={styles.contentBox}>{project.content}</div>
-          </div>
+          <CarouselProject key={project.id} project={project} />
         ))}
         <CarouselArrowButton
           position="right"

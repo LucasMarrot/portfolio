@@ -1,4 +1,4 @@
-import { TProject } from "../ProjectsCarousel";
+import { TProject } from "../CarouselProject/CarouselProject";
 import styles from "./CarouselIndicators.module.scss";
 
 type TCarouselIndicatorsProps = {
