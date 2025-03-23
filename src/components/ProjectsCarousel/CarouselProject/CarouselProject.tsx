@@ -74,13 +74,16 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
 
   React.useEffect(() => {
     const contentBox = contentBoxRef.current;
-    if (contentBox) contentBox.addEventListener("wheel", handleScroll);
+    if (contentBox) {
+      contentBox.addEventListener("wheel", handleScroll);
+      contentBox.addEventListener("touchmove", handleTouchMove);
+    }
 
-    window.addEventListener("touchmove", handleTouchMove);
     return () => {
-      if (contentBox) contentBox.removeEventListener("wheel", handleScroll);
-
-      window.removeEventListener("touchmove", handleTouchMove);
+      if (contentBox) {
+        contentBox.removeEventListener("wheel", handleScroll);
+        contentBox.removeEventListener("touchmove", handleTouchMove);
+      }
     };
   }, [handleScroll, handleTouchMove]);
 
