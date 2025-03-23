@@ -38,14 +38,12 @@ export default function InteractiveObject({
 
     const handleMouseEnter = () => {
       setTimeout(() => {
-        if (isTouched) return;
         setInteractiveState({ type, text });
       }, 10);
     };
 
     const handleMouseLeave = () => {
       setTimeout(() => {
-        if (isTouched) return;
         setInteractiveState({ type: null });
       }, 10);
     };
