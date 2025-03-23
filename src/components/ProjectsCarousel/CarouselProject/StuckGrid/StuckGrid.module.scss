@@ -1,0 +1,15 @@
+.stuckGrid {
+  color: white;
+  block-size: 100svh;
+  width: 100%;
+  height: 100%;
+  perspective: 100px;
+  transform-style: preserve-3d;
+  display: grid;
+  grid: repeat(4, 25dvh) / repeat(4, 25dvw);
+  place-items: center;
+  position: absolute;
+  overflow: clip;
+  top: 0;
+  transition: all 0.2s ease-in-out;
+}
