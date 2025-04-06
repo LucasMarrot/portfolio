@@ -95,23 +95,23 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
     const left: HTMLDivElement | null = leftBoxRef.current;
     const right: HTMLDivElement | null = rightBoxRef.current;
 
-    const baseRotateY = 25;
-    const maxOffsetY = 10;
-    const maxOffsetX = 5;
+    const baseRotateY: number = 25;
+    const maxOffsetY: number = 10;
+    const maxOffsetX: number = 5;
 
-    let offsetX = 0;
-    let offsetY = 0;
-    let targetOffsetX = 0;
-    let targetOffsetY = 0;
-    let lastMoveTime = Date.now();
+    let offsetX: number = 0;
+    let offsetY: number = 0;
+    let targetOffsetX: number = 0;
+    let targetOffsetY: number = 0;
+    let lastMoveTime: number = Date.now();
 
-    let floatTime = 0;
-    const floatSpeed = 0.0005;
-    const floatAmplitude = 4;
+    let floatTime: number = 0;
+    const floatSpeed: number = 0.0005;
+    const floatAmplitude: number = 4;
 
     const animate = () => {
-      const now = Date.now();
-      const timeSinceMove = now - lastMoveTime;
+      const now: number = Date.now();
+      const timeSinceMove: number = now - lastMoveTime;
 
       offsetX += (targetOffsetX - offsetX) * 0.1;
       offsetY += (targetOffsetY - offsetY) * 0.1;
@@ -122,32 +122,33 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
         floatTime = 0;
       }
 
-      const floatX = Math.sin(floatTime * floatSpeed) * floatAmplitude;
-      const floatYL = Math.cos(floatTime * floatSpeed) * floatAmplitude;
-      const floatYR = Math.sin(floatTime * floatSpeed * 1.1) * floatAmplitude;
+      const floatX: number = Math.sin(floatTime * floatSpeed) * floatAmplitude;
+      const floatYL: number = Math.cos(floatTime * floatSpeed) * floatAmplitude;
+      const floatYR: number =
+        Math.sin(floatTime * floatSpeed * 1.1) * floatAmplitude;
 
-      const rotX = -offsetY * maxOffsetX + floatX;
-      const rotYLeft = baseRotateY + offsetX * maxOffsetY + floatYL;
-      const rotYRight = -baseRotateY - offsetX * maxOffsetY + floatYR;
+      const rotX: number = -offsetY * maxOffsetX + floatX;
+      const rotYLeft: number = baseRotateY + offsetX * maxOffsetY + floatYL;
+      const rotYRight: number = -baseRotateY - offsetX * maxOffsetY + floatYR;
 
       if (left)
-        left.style.transform = `perspective(800px) rotateY(${rotYLeft}deg) rotateX(${rotX}deg)`;
+        left.style.transform = `perspective(800px) rotateY(${rotYLeft}deg) rotateX(${rotX}deg) scale(1.2)`;
 
       if (right)
-        right.style.transform = `perspective(800px) rotateY(${rotYRight}deg) rotateX(${rotX}deg)`;
+        right.style.transform = `perspective(800px) rotateY(${rotYRight}deg) rotateX(${rotX}deg) scale(1.2)`;
 
       requestAnimationFrame(animate);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+    const handleMouseMove = (e: MouseEvent): void => {
+      const centerX: number = window.innerWidth / 2;
+      const centerY: number = window.innerHeight / 2;
       targetOffsetX = (e.clientX - centerX) / centerX;
       targetOffsetY = (e.clientY - centerY) / centerY;
       lastMoveTime = Date.now();
     };
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = (): void => {
       targetOffsetX = 0;
       targetOffsetY = 0;
     };
