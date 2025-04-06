@@ -4,7 +4,7 @@ import StuckGrid from "./StuckGrid/StuckGrid";
 
 export type TProject = {
   id: string;
-  backgroundColor: string;
+  backgroundGradientColor: string; // #000, #fff -> black to white gradient
   content: React.ReactNode;
 };
 
@@ -20,9 +20,13 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const [scale, setScale] = React.useState(1);
   const contentBoxRef = React.useRef<HTMLDivElement>(null);
   const isTriggerScroll = React.useRef<boolean>(false);
+  const leftBoxRef = React.useRef<HTMLDivElement>(null);
+  const rightBoxRef = React.useRef<HTMLDivElement>(null);
 
   const triggerAutoScroll = (deltaYTarget: number): void => {
     if (contentBoxRef.current) {
+      contentBoxRef.current.style.pointerEvents = "none";
+      contentBoxRef.current.style.background = "white";
       const evt: WheelEvent = new WheelEvent("wheel", {
         bubbles: true,
         cancelable: true,
@@ -87,17 +91,83 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
     };
   }, [handleScroll, handleTouchMove]);
 
+  React.useEffect(() => {
+    const left: HTMLDivElement | null = leftBoxRef.current;
+    const right: HTMLDivElement | null = rightBoxRef.current;
+
+    const baseRotateY = 25;
+    const maxOffsetY = 10;
+    const maxOffsetX = 5;
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let targetOffsetX = 0;
+    let targetOffsetY = 0;
+    let lastMoveTime = Date.now();
+
+    let floatTime = 0;
+    const floatSpeed = 0.0005;
+    const floatAmplitude = 4;
+
+    const animate = () => {
+      const now = Date.now();
+      const timeSinceMove = now - lastMoveTime;
+
+      offsetX += (targetOffsetX - offsetX) * 0.1;
+      offsetY += (targetOffsetY - offsetY) * 0.1;
+
+      if (timeSinceMove > 2000) {
+        floatTime += 16;
+      } else {
+        floatTime = 0;
+      }
+
+      const floatX = Math.sin(floatTime * floatSpeed) * floatAmplitude;
+      const floatYL = Math.cos(floatTime * floatSpeed) * floatAmplitude;
+      const floatYR = Math.sin(floatTime * floatSpeed * 1.1) * floatAmplitude;
+
+      const rotX = -offsetY * maxOffsetX + floatX;
+      const rotYLeft = baseRotateY + offsetX * maxOffsetY + floatYL;
+      const rotYRight = -baseRotateY - offsetX * maxOffsetY + floatYR;
+
+      if (left)
+        left.style.transform = `perspective(800px) rotateY(${rotYLeft}deg) rotateX(${rotX}deg)`;
+
+      if (right)
+        right.style.transform = `perspective(800px) rotateY(${rotYRight}deg) rotateX(${rotX}deg)`;
+
+      requestAnimationFrame(animate);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      targetOffsetX = (e.clientX - centerX) / centerX;
+      targetOffsetY = (e.clientY - centerY) / centerY;
+      lastMoveTime = Date.now();
+    };
+
+    const handleMouseLeave = () => {
+      targetOffsetX = 0;
+      targetOffsetY = 0;
+    };
+
+    document.body.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
+
+    animate();
+
+    return () => {
+      document.body.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   const animationTransform: string = `scale(${scale})`;
   const animationOpacity: number = 1 - scale / (MAX_SCALE_VALUE / 2);
 
   return (
-    <div
-      key={props.project.id}
-      className={styles.carouselItem}
-      style={{
-        backgroundColor: props.project.backgroundColor,
-      }}
-    >
+    <div key={props.project.id} className={styles.carouselItem}>
       <StuckGrid scale={scale} />
       <div
         className={styles.contentBox}
@@ -107,7 +177,16 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
           opacity: animationOpacity,
         }}
       >
-        {props.project.content}
+        <div className={styles.container}>
+          <div ref={leftBoxRef} className={styles.left}>
+            {props.project.content}
+          </div>
+          <div className={styles.middle}>
+            <p>Scrollez pour entrer dans le projet</p>
+            <p>↓</p>
+          </div>
+          <div ref={rightBoxRef} className={styles.right}></div>
+        </div>
       </div>
     </div>
   );
