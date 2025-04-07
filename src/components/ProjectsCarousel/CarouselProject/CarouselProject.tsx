@@ -3,9 +3,10 @@ import styles from "./CarouselProject.module.scss";
 import StuckGrid from "./StuckGrid/StuckGrid";
 
 export type TProject = {
-  id: string;
-  backgroundGradientColor: string; // #000, #fff -> black to white gradient
-  content: React.ReactNode;
+  id: number;
+  primaryColor: string;
+  leftContent: React.ReactNode;
+  rightGifName?: string;
 };
 
 type TCarouselProjectProps = {
@@ -26,7 +27,6 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const triggerAutoScroll = (deltaYTarget: number): void => {
     if (contentBoxRef.current) {
       contentBoxRef.current.style.pointerEvents = "none";
-      contentBoxRef.current.style.background = "white";
       const evt: WheelEvent = new WheelEvent("wheel", {
         bubbles: true,
         cancelable: true,
@@ -168,7 +168,16 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const animationOpacity: number = 1 - scale / (MAX_SCALE_VALUE / 2);
 
   return (
-    <div key={props.project.id} className={styles.carouselItem}>
+    <div
+      key={props.project.id}
+      className={styles.carouselItem}
+      style={{
+        background:
+          props.project.id % 2 === 0
+            ? `linear-gradient(270deg, ${props.project.primaryColor}, var(--bg-color))`
+            : `linear-gradient(270deg, var(--bg-color), ${props.project.primaryColor})`,
+      }}
+    >
       <StuckGrid scale={scale} />
       <div
         className={styles.contentBox}
@@ -180,13 +189,21 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
       >
         <div className={styles.container}>
           <div ref={leftBoxRef} className={styles.left}>
-            {props.project.content}
+            {props.project.leftContent}
           </div>
           <div className={styles.middle}>
             <p>Scrollez pour entrer dans le projet</p>
             <p>↓</p>
           </div>
-          <div ref={rightBoxRef} className={styles.right}></div>
+          <div
+            ref={rightBoxRef}
+            className={styles.right}
+            style={{
+              backgroundImage: props.project.rightGifName
+                ? `url(${require(`../../../assets/images/${props.project.rightGifName}`)})`
+                : undefined,
+            }}
+          ></div>
         </div>
       </div>
     </div>
