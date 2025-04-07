@@ -5,9 +5,9 @@ import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
 export default function Projects(): JSX.Element {
   const projects: TProject[] = [
     {
-      id: "1",
-      backgroundGradientColor: "#134D67, #1C719C, #0C3245, #F2F5F8",
-      content: (
+      id: 1,
+      primaryColor: "#1c719c",
+      leftContent: (
         <div
           style={{
             display: "flex",
@@ -210,11 +210,12 @@ export default function Projects(): JSX.Element {
           </p>
         </div>
       ),
+      rightGifName: "DEMO_ALGOFORGE.gif",
     },
     {
-      id: "2",
-      backgroundGradientColor: "#5d3c18",
-      content: (
+      id: 2,
+      primaryColor: "#CB161B",
+      leftContent: (
         <h1
           style={{
             fontFamily: "Expletus Sans",
@@ -224,6 +225,7 @@ export default function Projects(): JSX.Element {
           Clim 64-40
         </h1>
       ),
+      rightGifName: "DEMO_CLIM64-40.gif",
     },
   ];
   return (
