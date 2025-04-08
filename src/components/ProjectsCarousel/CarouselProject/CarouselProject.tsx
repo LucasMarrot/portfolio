@@ -174,8 +174,8 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
       style={{
         background:
           props.project.id % 2 === 0
-            ? `linear-gradient(270deg, ${props.project.primaryColor}, var(--bg-color))`
-            : `linear-gradient(270deg, var(--bg-color), ${props.project.primaryColor})`,
+            ? `linear-gradient(to left, ${props.project.primaryColor},var(--bg-color)) right`
+            : `linear-gradient(to right, ${props.project.primaryColor},var(--bg-color)) left`,
       }}
     >
       <StuckGrid scale={scale} />
@@ -193,7 +193,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
           </div>
           <div className={styles.middle}>
             <p>Scrollez pour entrer dans le projet</p>
-            <p>↓</p>
+            <p className={styles.arrow}>↓</p>
           </div>
           <div
             ref={rightBoxRef}
