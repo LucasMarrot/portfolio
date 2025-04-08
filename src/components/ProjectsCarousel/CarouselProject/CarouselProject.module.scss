@@ -69,6 +69,7 @@
 
 .middle {
   display: flex;
+  user-select: none;
   align-items: center;
   height: 100%;
   line-height: 20px;

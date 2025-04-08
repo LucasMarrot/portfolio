@@ -17,11 +17,13 @@
   }
 
   &Title {
+    user-select: none;
     font-size: 50px;
     margin: 14px 0 0 0;
   }
 
   &Description {
+    user-select: none;
     text-align: center;
     font-size: 14px;
     margin: 14px 0 0 0;
