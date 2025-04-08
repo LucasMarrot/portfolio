@@ -3,7 +3,7 @@ import React from "react";
 import Cursor from "./components/Cursor/Cursor";
 import { CursorProvider } from "./contexts/CursorContext";
 import InitScene from "./components/_pages/InitScene/InitScene";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/_pages/Home/Home";
 import Projects from "./components/_pages/Projects/Projects";
 
@@ -20,7 +20,7 @@ function App() {
     <CursorProvider circleRef={circleRef}>
       <Cursor circleRef={circleRef} />
       <div className="App">
-        <BrowserRouter basename="/portfolio">
+        <HashRouter basename="/">
           <Routes>
             <Route
               path="/"
@@ -35,7 +35,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<></>} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </CursorProvider>
   );
