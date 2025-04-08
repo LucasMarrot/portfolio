@@ -95,7 +95,7 @@ export default function Cursor(props: CursorProps): JSX.Element {
       <Robot
         positionX={robotPosition.x}
         positionY={robotPosition.y}
-        path={window.location.pathname}
+        path={window.location.hash}
         speechText={
           interactiveState.type === InteractiveType.SPEAK ||
           interactiveState.type === InteractiveType.ALL
