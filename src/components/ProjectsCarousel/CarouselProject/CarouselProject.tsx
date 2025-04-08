@@ -5,6 +5,7 @@ import StuckGrid from "./StuckGrid/StuckGrid";
 export type TProject = {
   id: number;
   primaryColor: string;
+  keyWords: string[];
   leftContent: React.ReactNode;
   rightGifName?: string;
 };
@@ -16,6 +17,7 @@ type TCarouselProjectProps = {
 const ZOOM_AUTOSCROLL_DELTA: number = 8000;
 const ZOOM_AUTOSCROLL_STEP: number = 6;
 const MAX_SCALE_VALUE: number = 16;
+const SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS: number = 1.5;
 
 export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const [scale, setScale] = React.useState(1);
@@ -178,7 +180,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
             : `linear-gradient(to right, ${props.project.primaryColor},var(--bg-color)) left`,
       }}
     >
-      <StuckGrid scale={scale} />
+      <StuckGrid scale={scale} words={props.project.keyWords} />
       <div
         className={styles.contentBox}
         ref={contentBoxRef}
@@ -192,8 +194,12 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
             {props.project.leftContent}
           </div>
           <div className={styles.middle}>
-            <p>Scrollez pour entrer dans le projet</p>
-            <p className={styles.arrow}>↓</p>
+            {scale < SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS && (
+              <>
+                <p>Scrollez pour entrer dans le projet</p>
+                <p className={styles.arrow}>↓</p>
+              </>
+            )}
           </div>
           <div
             ref={rightBoxRef}

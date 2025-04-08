@@ -4,6 +4,39 @@ import { TProject } from "../../ProjectsCarousel/CarouselProject/CarouselProject
 import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
 import { getLogo } from "./Projects.utils";
 
+const items = [
+  "oklch()",
+  "scroll()",
+  "text-box-trim",
+  "pow()",
+  "@property",
+  "top-layer",
+  "@view-transition",
+  "var()",
+  "clamp()",
+  "view()",
+  "oklch()",
+  "scroll()",
+  "text-box-trim",
+  "pow()",
+  "@property",
+  "top-layer",
+  "@view-transition",
+  "var()",
+  "clamp()",
+  "view()",
+  "oklch()",
+  "scroll()",
+  "text-box-trim",
+  "pow()",
+  "@property",
+  "top-layer",
+  "@view-transition",
+  "var()",
+  "clamp()",
+  "view()",
+];
+
 export default function Projects(): JSX.Element {
   const projects: TProject[] = [
     {
@@ -21,6 +54,7 @@ export default function Projects(): JSX.Element {
         />
       ),
       rightGifName: "DEMO_ALGOFORGE.gif",
+      keyWords: items,
     },
     {
       id: 2,
@@ -37,6 +71,7 @@ export default function Projects(): JSX.Element {
         />
       ),
       rightGifName: "DEMO_CLIM64-40.gif",
+      keyWords: items,
     },
   ];
   return (

@@ -4,6 +4,7 @@ import StuckGridItem from "./StuckGridItem/StuckGridItem";
 
 type TStuckGridProps = {
   scale: number;
+  words: string[];
 };
 
 type TRange = {
@@ -12,8 +13,11 @@ type TRange = {
   length: number;
 };
 
-export default function StuckGrid({ scale }: TStuckGridProps): JSX.Element {
-  const totalItems: number = items.length;
+export default function StuckGrid({
+  scale,
+  words,
+}: TStuckGridProps): JSX.Element {
+  const totalItems: number = words.length;
 
   const calculateRange = (index: number, totalItems: number): TRange => {
     const overlap: number = 0.1;
@@ -36,7 +40,7 @@ export default function StuckGrid({ scale }: TStuckGridProps): JSX.Element {
 
   return (
     <div className={styles.stuckGrid}>
-      {items.map((item, index) => {
+      {words.map((item, index) => {
         const MAX_SCALE_VALUE: number = 16;
         const globalProgress: number = scale / MAX_SCALE_VALUE;
 
@@ -60,36 +64,3 @@ export default function StuckGrid({ scale }: TStuckGridProps): JSX.Element {
     </div>
   );
 }
-
-const items = [
-  "oklch()",
-  "scroll()",
-  "text-box-trim",
-  "pow()",
-  "@property",
-  "top-layer",
-  "@view-transition",
-  "var()",
-  "clamp()",
-  "view()",
-  "oklch()",
-  "scroll()",
-  "text-box-trim",
-  "pow()",
-  "@property",
-  "top-layer",
-  "@view-transition",
-  "var()",
-  "clamp()",
-  "view()",
-  "oklch()",
-  "scroll()",
-  "text-box-trim",
-  "pow()",
-  "@property",
-  "top-layer",
-  "@view-transition",
-  "var()",
-  "clamp()",
-  "view()",
-];
