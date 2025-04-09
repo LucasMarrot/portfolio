@@ -96,6 +96,10 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   }, [handleScroll, handleTouchMove]);
 
   React.useEffect(() => {
+    // Floating effect + mousemove effect
+    // This effect is used to create a floating effect on the project boxes
+    // and to rotate them based on the mouse position
+
     const left: HTMLDivElement | null = leftBoxRef.current;
     const right: HTMLDivElement | null = rightBoxRef.current;
 
