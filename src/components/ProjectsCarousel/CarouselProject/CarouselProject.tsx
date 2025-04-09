@@ -1,15 +1,21 @@
 import React from "react";
 import styles from "./CarouselProject.module.scss";
 import StuckGrid from "./StuckGrid/StuckGrid";
-import { getLogo } from "../../_pages/Projects/Projects.utils";
-import { ProjectDetails } from "./ProjectDetails/ProjectDetails";
+import { ProjectDetails, TProjectLinks } from "./ProjectDetails/ProjectDetails";
+import { TTechnologyNames } from "./TechnologyItem/TechnologyItem.utils";
 
 export type TProject = {
   id: number;
   primaryColor: string;
   keyWords: string[];
-  leftContent: React.ReactNode;
+  leftContent: JSX.Element;
   rightGifName?: string;
+  title: string;
+  year: string;
+  technologies: TTechnologyNames[];
+  description: string;
+  links: TProjectLinks;
+  logo: string;
 };
 
 type TCarouselProjectProps = {
@@ -237,27 +243,14 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
           }}
         >
           <ProjectDetails
-            title="ALGOFORGE"
-            year="2025"
-            technologies={["JS", "TS", "HTML", "CSS", "SCSS", "SVELTE", "BUN"]}
-            description="AlgoForge est une application web gratuite et open source de conception d'algorithmes, pensée par et pour les étudiants. Elle se distingue par sa simplicité, sa rapidité, et son respect du formalisme de l'IUT de Bayonne. Accessible depuis n'importe quel appareil, elle propose une interface dynamique, un rendu fidèle à l'export, des raccourcis pratiques, et des fonctionnalités collaboratives. Nous avons misé sur l'éco-responsabilité et la performance, guidant le choix de nos technologies et de notre approche."
-            links={{
-              browser: {
-                text: "Algoforge site web",
-                link: "https://algoforge.fr/",
-              },
-              github: {
-                text: "Algoforge github",
-                link: "https://github.com/Bing-Chill-inc/Algoforge-main",
-              },
-              wiki: {
-                text: "Algoforge wiki",
-                link: "https://bing-chill-inc.github.io/wikiforge/",
-              },
-            }}
+            title={props.project.title}
+            year={props.project.year}
+            technologies={props.project.technologies}
+            description={props.project.description}
+            links={props.project.links}
             primaryColor={props.project.primaryColor}
             projectId={props.project.id}
-            logo={getLogo("algoForge")}
+            logo={props.project.logo}
           />
         </div>
       )}

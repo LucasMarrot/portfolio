@@ -1,6 +1,8 @@
-export type TLogoName = "algoForge" | "clim64-40";
+import { ProjectCard } from "../../Project/Project";
 
-export const getLogo = (logoName: string): string => {
+export type TProjectName = "algoForge" | "clim64-40";
+
+export const getLogo = (logoName: TProjectName): string => {
   switch (logoName) {
     case "algoForge":
       return logoAlgoForge;
@@ -8,6 +10,37 @@ export const getLogo = (logoName: string): string => {
       return logoClim64_40;
     default:
       throw new Error(`Logo "${logoName}" not found`);
+  }
+};
+
+export const getProjectLeftContent = (name: TProjectName): JSX.Element => {
+  switch (name) {
+    case "algoForge":
+      return (
+        <ProjectCard
+          logo={getLogo("algoForge")}
+          title={"AlgoForge"}
+          description={
+            "Un éditeur graphique interactif permettant de concevoir des algorithmes."
+          }
+          colors={{ color: "#F2F5F8", fill: "#F2F5F8" }}
+          fontFamily={"Roboto"}
+        />
+      );
+    case "clim64-40":
+      return (
+        <ProjectCard
+          logo={getLogo("clim64-40")}
+          title={"Clim 64-40"}
+          description={
+            "Un site vitrine d’un artisan climaticien permettant de découvrir ses services, ses réalisations et de le contacter."
+          }
+          colors={{ color: "#F4F5F6", fill: "transparent" }}
+          fontFamily={"Expletus Sans"}
+        />
+      );
+    default:
+      throw new Error(`Project "${name}" not found`);
   }
 };
 

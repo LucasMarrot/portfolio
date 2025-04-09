@@ -1,8 +1,7 @@
 import Header from "../../Header/Header";
-import { ProjectCard } from "../../Project/Project";
 import { TProject } from "../../ProjectsCarousel/CarouselProject/CarouselProject";
 import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
-import { getLogo } from "./Projects.utils";
+import { getLogo, getProjectLeftContent } from "./Projects.utils";
 
 const items = [
   "oklch()",
@@ -107,35 +106,41 @@ export default function Projects(): JSX.Element {
   const projects: TProject[] = [
     {
       id: 1,
+      title: "AlgoForge",
+      year: "2025",
+      technologies: ["JS", "TS", "HTML", "CSS", "SCSS", "SVELTE", "BUN"],
+      description:
+        "AlgoForge est une application web gratuite et open source de conception d'algorithmes, pensée par et pour les étudiants. Elle se distingue par sa simplicité, sa rapidité, et son respect du formalisme de l'IUT de Bayonne. Accessible depuis n'importe quel appareil, elle propose une interface dynamique, un rendu fidèle à l'export, des raccourcis pratiques, et des fonctionnalités collaboratives. Nous avons misé sur l'éco-responsabilité et la performance, guidant le choix de nos technologies et de notre approche.",
+      links: {
+        browser: {
+          text: "Algoforge site web",
+          link: "https://algoforge.fr/",
+        },
+        github: {
+          text: "Algoforge github",
+          link: "https://github.com/Bing-Chill-inc/Algoforge-main",
+        },
+        wiki: {
+          text: "Algoforge wiki",
+          link: "https://bing-chill-inc.github.io/wikiforge/",
+        },
+      },
+      logo: getLogo("algoForge"),
       primaryColor: "#1c719c",
-      leftContent: (
-        <ProjectCard
-          logo={getLogo("algoForge")}
-          title={"AlgoForge"}
-          description={
-            "Un éditeur graphique interactif permettant de concevoir des algorithmes."
-          }
-          colors={{ color: "#F2F5F8", fill: "#F2F5F8" }}
-          fontFamily={"Roboto"}
-        />
-      ),
+      leftContent: getProjectLeftContent("algoForge"),
       rightGifName: "DEMO_ALGOFORGE.gif",
       keyWords: algoForgeKeyWordsFR,
     },
     {
       id: 2,
+      title: "Clim 64-40",
+      year: "2024",
+      technologies: [],
+      description: "",
+      links: {},
+      logo: getLogo("clim64-40"),
       primaryColor: "#CB161B",
-      leftContent: (
-        <ProjectCard
-          logo={getLogo("clim64-40")}
-          title={"Clim 64-40"}
-          description={
-            "Un site vitrine d’un artisan climaticien permettant de découvrir ses services, ses réalisations et de le contacter."
-          }
-          colors={{ color: "#F4F5F6", fill: "transparent" }}
-          fontFamily={"Expletus Sans"}
-        />
-      ),
+      leftContent: getProjectLeftContent("clim64-40"),
       rightGifName: "DEMO_CLIM64-40.gif",
       keyWords: items,
     },

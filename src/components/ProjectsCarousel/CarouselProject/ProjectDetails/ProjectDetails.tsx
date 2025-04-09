@@ -6,7 +6,7 @@ import { TTechnologyNames } from "../TechnologyItem/TechnologyItem.utils";
 import InteractiveObject from "../../../_commons/InteractiveObject/InteractiveObject";
 import { InteractiveType } from "../../../../contexts/InteractiveContext";
 
-type TProjectLinks = {
+export type TProjectLinks = {
   browser?: {
     text: string;
     link: string;
@@ -68,7 +68,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
       />
 
       <div className={styles.headerContainer}>
-        <h1>{title}</h1>
+        <h1>{title.toUpperCase()}</h1>
         <h1>{year}</h1>
       </div>
 
