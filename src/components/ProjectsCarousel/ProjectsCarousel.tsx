@@ -13,6 +13,7 @@ export const ProjectsCarousel = (
 ): JSX.Element => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isTriggerScroll, setIsTriggerScroll] = React.useState(false);
 
   const handleScroll = () => {
     if (!containerRef.current) return;
@@ -42,27 +43,37 @@ export const ProjectsCarousel = (
   return (
     <div className={styles.carouselWrapper}>
       <div ref={containerRef} className={styles.carouselContainer}>
-        <CarouselArrowButton
-          position="left"
-          activeIndex={activeIndex}
-          projects={props.projects}
-          scrollToSlide={scrollToSlide}
-        />
+        {!isTriggerScroll && (
+          <CarouselArrowButton
+            position="left"
+            activeIndex={activeIndex}
+            projects={props.projects}
+            scrollToSlide={scrollToSlide}
+          />
+        )}
         {props.projects.map((project) => (
-          <CarouselProject key={project.id} project={project} />
+          <CarouselProject
+            key={project.id}
+            project={project}
+            onIsTriggerScrollChange={setIsTriggerScroll}
+          />
         ))}
-        <CarouselArrowButton
-          position="right"
-          activeIndex={activeIndex}
-          projects={props.projects}
-          scrollToSlide={scrollToSlide}
-        />
+        {!isTriggerScroll && (
+          <CarouselArrowButton
+            position="right"
+            activeIndex={activeIndex}
+            projects={props.projects}
+            scrollToSlide={scrollToSlide}
+          />
+        )}
       </div>
-      <CarouselIndicators
-        scrollToSlide={scrollToSlide}
-        projects={props.projects}
-        activeIndex={activeIndex}
-      />
+      {!isTriggerScroll && (
+        <CarouselIndicators
+          scrollToSlide={scrollToSlide}
+          projects={props.projects}
+          activeIndex={activeIndex}
+        />
+      )}
     </div>
   );
 };

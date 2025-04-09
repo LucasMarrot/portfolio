@@ -12,6 +12,7 @@ export type TProject = {
 
 type TCarouselProjectProps = {
   project: TProject;
+  onIsTriggerScrollChange?: (isTriggerScroll: boolean) => void;
 };
 
 const ZOOM_AUTOSCROLL_DELTA: number = 8000;
@@ -41,6 +42,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const progressiveScroll = React.useCallback(
     (targetScroll: number, step: number = 5): void => {
       isTriggerScroll.current = true;
+      props.onIsTriggerScrollChange?.(true);
       const slowdownFactor: number = 0.01;
       let currentScroll: number = 0;
       const interval = setInterval(() => {
@@ -56,7 +58,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
         }
       }, 20);
     },
-    []
+    [props]
   );
 
   const handleScroll = React.useCallback(
