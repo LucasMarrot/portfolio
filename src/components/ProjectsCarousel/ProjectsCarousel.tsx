@@ -15,13 +15,13 @@ export const ProjectsCarousel = (
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isTriggerScroll, setIsTriggerScroll] = React.useState(false);
 
-  const handleScroll = () => {
-    if (!containerRef.current) return;
+  const handleScroll = React.useCallback(() => {
+    if (!containerRef.current || isTriggerScroll) return;
     const scrollLeft = containerRef.current.scrollLeft;
     const width = containerRef.current.offsetWidth;
     const index = Math.round(scrollLeft / width);
     setActiveIndex(index);
-  };
+  }, [isTriggerScroll]);
 
   const scrollToSlide = (index: number) => {
     if (containerRef.current) {
@@ -38,11 +38,18 @@ export const ProjectsCarousel = (
 
     ref.addEventListener("scroll", handleScroll);
     return () => ref.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div className={styles.carouselWrapper}>
-      <div ref={containerRef} className={styles.carouselContainer}>
+      <div
+        ref={containerRef}
+        className={
+          isTriggerScroll
+            ? styles.carouselContainerDisableScroll
+            : styles.carouselContainer
+        }
+      >
         {!isTriggerScroll && (
           <CarouselArrowButton
             position="left"
