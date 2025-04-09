@@ -176,48 +176,75 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const animationOpacity: number = 1 - scale / (MAX_SCALE_VALUE / 2);
 
   return (
-    <div
-      key={props.project.id}
-      className={styles.carouselItem}
-      style={{
-        background:
-          props.project.id % 2 === 0
-            ? `linear-gradient(to left, ${props.project.primaryColor},var(--bg-color)) right`
-            : `linear-gradient(to right, ${props.project.primaryColor},var(--bg-color)) left`,
-      }}
-    >
-      <StuckGrid scale={scale} words={props.project.keyWords} />
-      <div
-        className={styles.contentBox}
-        ref={contentBoxRef}
-        style={{
-          transform: animationTransform,
-          opacity: animationOpacity,
-        }}
-      >
-        <div className={styles.container}>
-          <div ref={leftBoxRef} className={styles.left}>
-            {props.project.leftContent}
-          </div>
-          <div className={styles.middle}>
-            {scale < SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS && (
-              <>
-                <p>Scrollez pour entrer dans le projet</p>
-                <p className={styles.arrow}>↓</p>
-              </>
-            )}
-          </div>
+    <>
+      {scale < MAX_SCALE_VALUE ? (
+        <div
+          key={props.project.id}
+          className={styles.carouselItem}
+          style={{
+            background:
+              props.project.id % 2 === 0
+                ? `linear-gradient(to left, ${props.project.primaryColor},var(--bg-color)) right`
+                : `linear-gradient(to right, ${props.project.primaryColor},var(--bg-color)) left`,
+          }}
+        >
+          <StuckGrid scale={scale} words={props.project.keyWords} />
           <div
-            ref={rightBoxRef}
-            className={styles.right}
+            className={styles.contentBox}
+            ref={contentBoxRef}
             style={{
-              backgroundImage: props.project.rightGifName
-                ? `url(${require(`../../../assets/images/${props.project.rightGifName}`)})`
-                : undefined,
+              transform: animationTransform,
+              opacity: animationOpacity,
             }}
-          ></div>
+          >
+            <div className={styles.container}>
+              <div ref={leftBoxRef} className={styles.left}>
+                {props.project.leftContent}
+              </div>
+              <div className={styles.middle}>
+                {scale < SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS && (
+                  <>
+                    <p>Scrollez pour entrer dans le projet</p>
+                    <p className={styles.arrow}>↓</p>
+                  </>
+                )}
+              </div>
+              <div
+                ref={rightBoxRef}
+                className={styles.right}
+                style={{
+                  backgroundImage: props.project.rightGifName
+                    ? `url(${require(`../../../assets/images/${props.project.rightGifName}`)})`
+                    : undefined,
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div
+          key={props.project.id}
+          className={styles.carouselItem}
+          style={{
+            background:
+              props.project.id % 2 === 0
+                ? `linear-gradient(to left, ${props.project.primaryColor},var(--bg-color)) right`
+                : `linear-gradient(to right, ${props.project.primaryColor},var(--bg-color)) left`,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              color: "var(--text-color)",
+            }}
+          >
+            <h1>Salut</h1>
+            <h2>Tu es dans le projet bravo !</h2>
+            <button onClick={() => window.location.reload()}>Quitter</button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
