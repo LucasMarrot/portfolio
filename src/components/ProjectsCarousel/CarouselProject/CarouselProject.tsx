@@ -3,6 +3,7 @@ import styles from "./CarouselProject.module.scss";
 import StuckGrid from "./StuckGrid/StuckGrid";
 import { ProjectDetails, TProjectLinks } from "./ProjectDetails/ProjectDetails";
 import { TTechnologyNames } from "./TechnologyItem/TechnologyItem.utils";
+import { useStrings } from "../../../customHooks/useStrings";
 
 export type TProject = {
   id: number;
@@ -34,6 +35,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const isTriggerScroll = React.useRef<boolean>(false);
   const leftBoxRef = React.useRef<HTMLDivElement>(null);
   const rightBoxRef = React.useRef<HTMLDivElement>(null);
+  const strings = useStrings();
 
   const triggerAutoScroll = (deltaYTarget: number): void => {
     if (contentBoxRef.current) {
@@ -214,7 +216,7 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
               <div className={styles.middle}>
                 {scale < SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS && (
                   <>
-                    <p>Scrollez pour entrer dans le projet</p>
+                    <p>{strings.carouselProjects.scrollToExploreTheProject}</p>
                     <p className={styles.arrow}>↓</p>
                   </>
                 )}

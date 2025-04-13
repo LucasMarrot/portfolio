@@ -1,7 +1,10 @@
+import { useLanguage } from "../../../contexts/LanguageContext";
+import { useStrings } from "../../../customHooks/useStrings";
 import Header from "../../Header/Header";
+import { ProjectLeftContent } from "../../ProjectLeftContent/ProjectLeftContent";
+import { getLogo } from "../../ProjectLeftContent/ProjectLeftContent.utils";
 import { TProject } from "../../ProjectsCarousel/CarouselProject/CarouselProject";
 import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
-import { getLogo, getProjectLeftContent } from "./Projects.utils";
 
 const clim6440KeyWordsFR = [
   "Climaticien",
@@ -34,6 +37,39 @@ const clim6440KeyWordsFR = [
   "Architecture de site",
   "Accessibilité web",
   "Référencement local",
+];
+
+const clim6440KeyWordsEN = [
+  "Climatician",
+  "Artisan",
+  "Visual identity",
+  "Logo",
+  "Chart design",
+  "Branding",
+  "Web design",
+  "Online presence",
+  "Client autonomy",
+  "Graphic design",
+  "System design",
+  "Site architecture",
+  "Web accessibility",
+  "Local SEO",
+  "Graphic redesign",
+  "Content creation",
+  "Printed materials",
+  "Digital materials",
+  "Business card",
+  "Flyer",
+  "Adobe Illustrator",
+  "WIX",
+  "CMS",
+  "Responsive",
+  "UX",
+  "UI",
+  "Visual communication",
+  "Branding",
+  "Graphic design",
+  "Design system",
 ];
 
 const algoForgeKeyWordsFR = [
@@ -103,52 +139,49 @@ const algoForgeKeyWordsEN = [
 ];
 
 export default function Projects(): JSX.Element {
+  const { language } = useLanguage();
+  const strings = useStrings();
+
   const projects: TProject[] = [
     {
       id: 1,
       title: "AlgoForge",
       year: "2025",
       technologies: ["JS", "TS", "HTML", "CSS", "SCSS", "SVELTE", "BUN"],
-      description:
-        "AlgoForge est une application web gratuite et open source de conception d'algorithmes, pensée par et pour les étudiants. Elle se distingue par sa simplicité, sa rapidité, et son respect du formalisme de l'IUT de Bayonne. Accessible depuis n'importe quel appareil, elle propose une interface dynamique, un rendu fidèle à l'export, des raccourcis pratiques, et des fonctionnalités collaboratives. Nous avons misé sur l'éco-responsabilité et la performance, guidant le choix de nos technologies et de notre approche.",
+      description: strings.projects.algoForge.description,
       links: {
         browser: {
-          text: "Consulter le site web",
           link: "https://algoforge.fr/",
         },
         github: {
-          text: "Consulter le Github",
           link: "https://github.com/Bing-Chill-inc/Algoforge-main",
         },
         wiki: {
-          text: "Consulter le wiki",
           link: "https://bing-chill-inc.github.io/wikiforge/",
         },
       },
       logo: getLogo("algoForge"),
       primaryColor: "#1c719c",
-      leftContent: getProjectLeftContent("algoForge"),
+      leftContent: <ProjectLeftContent name="algoForge" />,
       rightGifName: "DEMO_ALGOFORGE.gif",
-      keyWords: algoForgeKeyWordsFR,
+      keyWords: language === "fr" ? algoForgeKeyWordsFR : algoForgeKeyWordsEN,
     },
     {
       id: 2,
       title: "Clim 64-40",
       year: "2024",
       technologies: ["ILLUSTRATOR", "WIX"],
-      description:
-        "Clim 64-40 est le site vitrine d’un artisan climaticien, un projet que j’ai mené en deux grandes étapes. La première partie concernait le design : création du logo et élaboration d’une charte graphique complète, avec toute la réflexion autour de l’identité visuelle de l’entreprise. J’ai ensuite appliqué cette charte aussi bien sur des supports physiques (cartes de visite, flyers) que numériques, avec la conception du site web. Comme l’objectif était que l’artisan puisse modifier son site facilement et rapidement, le choix s’est porté sur un CMS, en l’occurrence WIX.",
+      description: strings.projects.clim6440.description,
       links: {
         browser: {
-          text: "Consulter le site web",
           link: "https://clim64-40.fr/",
         },
       },
       logo: getLogo("clim64-40"),
       primaryColor: "#CB161B",
-      leftContent: getProjectLeftContent("clim64-40"),
+      leftContent: <ProjectLeftContent name="clim64-40" />,
       rightGifName: "DEMO_CLIM64-40.gif",
-      keyWords: clim6440KeyWordsFR,
+      keyWords: language === "fr" ? clim6440KeyWordsFR : clim6440KeyWordsEN,
     },
   ];
   return (

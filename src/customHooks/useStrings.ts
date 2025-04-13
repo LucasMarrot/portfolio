@@ -3,6 +3,7 @@ import en from '../translations/en';
 import fr from '../translations/fr';
 
 const translations = { en, fr };
+export type TStrings = typeof translations[keyof typeof translations];
 
 export const useStrings = () => {
   const { language } = useLanguage();

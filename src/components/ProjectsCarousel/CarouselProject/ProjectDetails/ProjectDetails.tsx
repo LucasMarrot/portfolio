@@ -5,18 +5,19 @@ import { ProjectLink } from "../ProjectLink/ProjectLink";
 import { TTechnologyNames } from "../TechnologyItem/TechnologyItem.utils";
 import InteractiveObject from "../../../_commons/InteractiveObject/InteractiveObject";
 import { InteractiveType } from "../../../../contexts/InteractiveContext";
+import { useStrings } from "../../../../customHooks/useStrings";
 
 export type TProjectLinks = {
   browser?: {
-    text: string;
+    text?: string;
     link: string;
   };
   github?: {
-    text: string;
+    text?: string;
     link: string;
   };
   wiki?: {
-    text: string;
+    text?: string;
     link: string;
   };
 };
@@ -42,6 +43,8 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   projectId,
   logo,
 }) => {
+  const strings = useStrings();
+
   return (
     <div className={styles.projectDetails}>
       <InteractiveObject
@@ -73,7 +76,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
       </div>
 
       <div className={styles.section}>
-        <h2>Technologies</h2>
+        <h2>{strings.technologiesLabel}</h2>
         <div className={styles.technologiesGrid}>
           {technologies.map((tech) => (
             <TechnologyItem key={tech} name={tech} />
@@ -82,7 +85,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
       </div>
 
       <div className={styles.section}>
-        <h2>Description</h2>
+        <h2>{strings.descriptionLabel}</h2>
         <div className={styles.description}>
           <p>{description}</p>
         </div>
@@ -92,21 +95,21 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         {links.browser && (
           <ProjectLink
             type="browser"
-            text={links.browser.text}
+            text={links.browser.text || strings.links.browser}
             link={links.browser.link}
           />
         )}
         {links.github && (
           <ProjectLink
             type="github"
-            text={links.github.text}
+            text={links.github.text || strings.links.github}
             link={links.github.link}
           />
         )}
         {links.wiki && (
           <ProjectLink
             type="wiki"
-            text={links.wiki.text}
+            text={links.wiki.text || strings.links.wiki}
             link={links.wiki.link}
           />
         )}

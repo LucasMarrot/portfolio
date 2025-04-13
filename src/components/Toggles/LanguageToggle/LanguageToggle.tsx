@@ -17,7 +17,7 @@ export default function LanguageToggle(): JSX.Element {
         className={styles.languageToggle}
         aria-label="Toggle language"
       >
-        {language === "en" ? "FR" : "EN"}
+        {language === "fr" ? "FR" : "EN"}
       </button>
     </InteractiveObject>
   );
