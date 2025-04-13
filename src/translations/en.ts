@@ -29,4 +29,5 @@ export default {
   },
   descriptionLabel: "Description",
   technologiesLabel: "Technologies",
+  musicCredit: "Music by Lidrima",
 } as const;
