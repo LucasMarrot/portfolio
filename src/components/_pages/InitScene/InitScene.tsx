@@ -7,6 +7,7 @@ import {
 import Lever from "../../Lever/Lever";
 import { useScene } from "../../../contexts/SceneContext";
 import styles from "./InitScene.module.scss";
+import { useStrings } from "../../../customHooks/useStrings";
 
 interface InitSceneProps {
   onComplete: () => void;
@@ -15,6 +16,7 @@ interface InitSceneProps {
 export default function InitScene({ onComplete }: InitSceneProps): JSX.Element {
   const { sceneState } = useScene();
   const { setInteractiveState } = useInteractive();
+  const strings = useStrings();
 
   React.useEffect(() => {
     if (sceneState === "completed") {
@@ -30,7 +32,7 @@ export default function InitScene({ onComplete }: InitSceneProps): JSX.Element {
       {sceneState !== "completed" && (
         <InteractiveObject
           type={InteractiveType.ALL}
-          text="Hello !"
+          text={strings.leverText}
           className={styles.leverContainer}
         >
           <Lever />

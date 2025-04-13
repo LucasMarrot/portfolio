@@ -1,6 +1,11 @@
 export default {
-  title: "Hello! This is a test",
-  leverText: "Pull the lever!",
+  leverText: "Hello and welcome!\n" +
+  "I am Clank and I will accompany you on this site visit.\n\n" +
+  "Before you pull the lever, make sure to keep these 3 interactions in mind:\n\n" +
+  "🟢 Green: I speak.\n" +
+  "🟠 Orange: You can click.\n" +
+  "🔴 Red: You can click, and I will speak to you at the same time.\n\n" +
+  "Enjoy yourself!",
   nav: {
     home: "Home",
     projects: "Projects",
@@ -32,4 +37,5 @@ export default {
   musicCredit: "Music by Lidrima",
   visitMyGithub: "Visit my GitHub",
   visitMyLinkedin: "Visit my LinkedIn",
+  nameInfo: "Ouaw, it's a sweet name!",
 } as const;

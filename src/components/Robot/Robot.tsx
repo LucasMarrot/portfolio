@@ -141,7 +141,29 @@ export default function Robot(props: RobotProps): JSX.Element {
       }}
     >
       {props.speechText && (
-        <div className={styles.speechBubble}>{props.speechText}</div>
+        <div
+          className={styles.speechBubble}
+          ref={(el) => {
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              const viewportWidth = window.innerWidth;
+
+              // Si la bulle dépasse l'écran à droite
+              if (rect.right > viewportWidth) {
+                el.style.right = "auto";
+                el.style.left = "0";
+              }
+
+              // Si la bulle dépasse l'écran à gauche
+              if (rect.left < 0) {
+                el.style.right = "auto";
+                el.style.left = "100%";
+              }
+            }
+          }}
+        >
+          {props.speechText}
+        </div>
       )}
     </div>
   );

@@ -1,6 +1,11 @@
 export default {
-  title: "Bonjour ! Ceci est un test",
-  leverText: "Tire le levier !",
+  leverText: "Salut et bienvenue !\n" +
+  "Je suis Clank et je vais t’accompagner dans la visite de ce site.\n\n" +
+  "Avant de tirer le levier pour entrer, retiens bien ces 3 intéractions :\n\n" +
+  "🟢 Vert : je parle.\n" +
+  "🟠 Orange : tu peux cliquer.\n" +
+  "🔴 Rouge : tu peux cliquer, et je te parlerai en même temps.\n\n" +
+  "Amuse-toi bien !",
   nav: {
     home: "Accueil",
     projects: "Projets",
@@ -33,4 +38,5 @@ export default {
   musicCredit: "Musique par Lidrima",
   visitMyGithub: "Visitez mon GitHub",
   visitMyLinkedin: "Visitez mon LinkedIn",
+  nameInfo: "Wow, sounds like a name for a handsome guy!",
 } as const;

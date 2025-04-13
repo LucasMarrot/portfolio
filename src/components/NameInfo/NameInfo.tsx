@@ -2,9 +2,11 @@ import React from "react";
 import styles from "./NameInfo.module.scss";
 import InteractiveObject from "../_commons/InteractiveObject/InteractiveObject";
 import { InteractiveType } from "../../contexts/InteractiveContext";
+import { useStrings } from "../../customHooks/useStrings";
 
 export default function NameInfo(): JSX.Element {
   const [animationCompleted, setAnimationCompleted] = React.useState(false);
+  const strings = useStrings();
 
   React.useEffect(() => {
     const animationDuration: number = 3200;
@@ -18,7 +20,7 @@ export default function NameInfo(): JSX.Element {
   return (
     <InteractiveObject
       type={InteractiveType.SPEAK}
-      text="Ouaw, il a le nom d'un beau gosse !"
+      text={strings.nameInfo}
       style={{
         position: "absolute",
         top: "50%",
