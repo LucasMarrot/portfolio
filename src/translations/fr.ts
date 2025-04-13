@@ -31,4 +31,6 @@ export default {
   descriptionLabel: "Description",
   technologiesLabel: "Technologies",
   musicCredit: "Musique par Lidrima",
+  visitMyGithub: "Visitez mon GitHub",
+  visitMyLinkedin: "Visitez mon LinkedIn",
 } as const;
