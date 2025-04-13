@@ -4,9 +4,9 @@
   cursor: inherit;
   font-size: 1.5rem;
   padding: 0.5rem;
-  margin-left: 1rem;
   color: var(--text-color);
   transition: transform 0.3s ease;
+  z-index: 3;
 
   &:hover {
     transform: scale(1.1);
