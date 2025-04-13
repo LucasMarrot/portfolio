@@ -1,7 +1,7 @@
-import { useLanguage } from "../../contexts/LanguageContext";
+import { useLanguage } from "../../../contexts/LanguageContext";
 import styles from "./LanguageToggle.module.scss";
-import InteractiveObject from "../_commons/InteractiveObject/InteractiveObject";
-import { InteractiveType } from "../../contexts/InteractiveContext";
+import InteractiveObject from "../../_commons/InteractiveObject/InteractiveObject";
+import { InteractiveType } from "../../../contexts/InteractiveContext";
 
 export default function LanguageToggle(): JSX.Element {
   const { language, setLanguage } = useLanguage();

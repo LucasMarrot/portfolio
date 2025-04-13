@@ -1,7 +1,7 @@
-import { useTheme } from "../../contexts/ThemeProvider";
+import { useTheme } from "../../../contexts/ThemeProvider";
 import styles from "./ThemeToggle.module.scss";
-import InteractiveObject from "../_commons/InteractiveObject/InteractiveObject";
-import { InteractiveType } from "../../contexts/InteractiveContext";
+import InteractiveObject from "../../_commons/InteractiveObject/InteractiveObject";
+import { InteractiveType } from "../../../contexts/InteractiveContext";
 
 export default function ThemeToggle(): JSX.Element {
   const { theme, toggleTheme } = useTheme();

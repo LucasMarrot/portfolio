@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeProvider";
 import { InteractiveProvider } from "./contexts/InteractiveContext";
 import { SceneProvider } from "./contexts/SceneContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { SoundProvider } from "./contexts/SoundContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,11 +17,13 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <LanguageProvider>
-        <InteractiveProvider>
-          <SceneProvider>
-            <App />
-          </SceneProvider>
-        </InteractiveProvider>
+        <SoundProvider>
+          <InteractiveProvider>
+            <SceneProvider>
+              <App />
+            </SceneProvider>
+          </InteractiveProvider>
+        </SoundProvider>
       </LanguageProvider>
     </ThemeProvider>
   </React.StrictMode>
