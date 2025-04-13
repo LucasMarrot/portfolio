@@ -17,6 +17,11 @@
   overflow: hidden;
   background-size: 95% 100% !important;
   background-repeat: no-repeat !important;
+
+  @media (max-width: 768px) {
+    align-items: center;
+    // padding: 100px 0;
+  }
 }
 
 .innerCarouselItem {
@@ -41,6 +46,16 @@
   width: 1000px;
   transform-style: preserve-3d;
   transform: perspective(1000px);
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 70vh;
+    justify-content: center;
+    margin: auto;
+    transform: none;
+  }
 }
 .container:hover {
   --middle-opacity: 1;
@@ -65,10 +80,24 @@
   text-align: center;
   flex: 1;
   position: relative;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    min-width: auto;
+    margin: 10px;
+    transform: none !important; // Override perspective transforms
+  }
 }
 .left {
   margin-left: 30px;
   transform: perspective(800px) rotateY(25deg) scale(0.6);
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    transform: none;
+    height: 100px;
+    scale: 0.8;
+  }
 }
 
 .right {
@@ -79,6 +108,14 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   transform: perspective(800px) rotateY(-25deg) scale(0.6);
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    // height: 0px; // Définir une hauteur fixe pour l'image
+    // background-size: cover;
+    // transform: none;
+    // scale: 0.6;
+  }
 }
 
 .middle {
@@ -98,6 +135,12 @@
   pointer-events: none;
   color: var(--text-color);
   text-shadow: 1px 1px 1px var(--primary-color);
+
+  @media (max-width: 768px) {
+    padding: 0;
+    height: 0;
+    // --middle-opacity: 1; // Toujours visible en mobile
+  }
 }
 
 .arrow {
