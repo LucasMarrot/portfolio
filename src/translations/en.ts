@@ -37,5 +37,5 @@ export default {
   musicCredit: "Music by Lidrima",
   visitMyGithub: "Visit my GitHub",
   visitMyLinkedin: "Visit my LinkedIn",
-  nameInfo: "Ouaw, it's a sweet name!",
+  nameInfo: "Wow, sounds like a name for a handsome guy!",
 } as const;
