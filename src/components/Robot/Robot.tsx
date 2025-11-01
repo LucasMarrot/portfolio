@@ -58,7 +58,7 @@ export default function Robot(props: RobotProps): JSX.Element {
     // Load 3D Model
     const loader = new GLTFLoader();
     loader.load(
-      process.env.PUBLIC_URL + "/models/robot.glb", // Path to your model file
+      process.env.PUBLIC_URL + "/models/robot.glb",
       (gltf) => {
         const modelRobot = gltf.scene;
         modelRobot.position.set(0, 0, 0); // Position the model in front of the camera
@@ -147,17 +147,21 @@ export default function Robot(props: RobotProps): JSX.Element {
             if (el) {
               const rect = el.getBoundingClientRect();
               const viewportWidth = window.innerWidth;
+              const viewportHeight = window.innerHeight;
 
               // Si la bulle dépasse l'écran à droite
               if (rect.right > viewportWidth) {
-                el.style.right = "auto";
-                el.style.left = "0";
+                el.style.left = "-70%";
               }
 
               // Si la bulle dépasse l'écran à gauche
               if (rect.left < 0) {
-                el.style.right = "auto";
                 el.style.left = "100%";
+              }
+
+              // Si la bulle dépasse l'écran en bas
+              if (rect.bottom > viewportHeight) {
+                el.style.top = "-70%";
               }
             }
           }}
