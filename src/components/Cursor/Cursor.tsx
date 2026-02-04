@@ -1,10 +1,19 @@
-import { useRef, useEffect, useState, RefObject } from "react";
+import {
+  useRef,
+  useEffect,
+  useState,
+  RefObject,
+  useCallback,
+  lazy,
+  Suspense,
+} from "react";
 import styles from "./Cursor.module.scss";
-import Robot from "../Robot/Robot";
 import {
   InteractiveType,
   useInteractive,
 } from "../../contexts/InteractiveContext";
+
+const Robot = lazy(() => import("../Robot/Robot"));
 
 type CursorProps = {
   circleRef: RefObject<HTMLDivElement>;
@@ -19,10 +28,26 @@ export default function Cursor(props: CursorProps): JSX.Element {
   const currentScale = useRef(0);
   const currentAngle = useRef(0);
   const SPEED = 0.1;
-  const ROBOT_SIZE = 200; // Taille du robot
-  const ROBOT_OFFSET = { x: -25, y: -50 }; // Offset par rapport au curseur
+  const ROBOT_SIZE = 200;
+  const ROBOT_OFFSET = { x: -25, y: -50 };
 
   const [robotPosition, setRobotPosition] = useState({ x: 0, y: 0 });
+
+  /**
+   * Memoize robot position update to avoid unnecessary recalculations
+   */
+  const updateRobotPosition = useCallback(() => {
+    let newX = circle.current.x + ROBOT_OFFSET.x;
+    let newY = circle.current.y + ROBOT_OFFSET.y;
+
+    const maxX = window.innerWidth - ROBOT_SIZE;
+    const maxY = window.innerHeight - ROBOT_SIZE;
+
+    newX = Math.max(0, Math.min(maxX, newX));
+    newY = Math.max(0, Math.min(maxY, newY));
+
+    setRobotPosition({ x: newX, y: newY });
+  }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -62,19 +87,7 @@ export default function Cursor(props: CursorProps): JSX.Element {
         circleRef.current.style.transform = `${translateTransform} ${rotateTransform} ${scaleTransform}`;
       }
 
-      // MANAGE ROBOT
-      let newX = circle.current.x + ROBOT_OFFSET.x;
-      let newY = circle.current.y + ROBOT_OFFSET.y;
-
-      // Ajuster la position pour garder le robot dans l'écran
-      const maxX = window.innerWidth - ROBOT_SIZE;
-      const maxY = window.innerHeight - ROBOT_SIZE;
-
-      // Limiter uniquement aux bords de l'écran
-      newX = Math.max(0, Math.min(maxX, newX));
-      newY = Math.max(0, Math.min(maxY, newY));
-
-      setRobotPosition({ x: newX, y: newY });
+      updateRobotPosition();
 
       requestAnimationFrame(tick);
     };
@@ -84,7 +97,7 @@ export default function Cursor(props: CursorProps): JSX.Element {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [ROBOT_OFFSET.x, ROBOT_OFFSET.y, circleRef]);
+  }, [circleRef, updateRobotPosition]);
 
   return (
     <>
@@ -92,17 +105,19 @@ export default function Cursor(props: CursorProps): JSX.Element {
         ref={circleRef}
         className={`${styles.circle} ${interactiveState.type ? styles[interactiveState.type] : ""}`}
       />
-      <Robot
-        positionX={robotPosition.x}
-        positionY={robotPosition.y}
-        path={window.location.hash}
-        speechText={
-          interactiveState.type === InteractiveType.SPEAK ||
-          interactiveState.type === InteractiveType.ALL
-            ? interactiveState.text
-            : undefined
-        }
-      />
+      <Suspense fallback={null}>
+        <Robot
+          positionX={robotPosition.x}
+          positionY={robotPosition.y}
+          path={window.location.hash}
+          speechText={
+            interactiveState.type === InteractiveType.SPEAK ||
+            interactiveState.type === InteractiveType.ALL
+              ? interactiveState.text
+              : undefined
+          }
+        />
+      </Suspense>
     </>
   );
 }

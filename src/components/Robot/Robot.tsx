@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import styles from "./Robot.module.scss";
@@ -20,15 +20,15 @@ enum RobotAnimation {
   Welcome = 4,
 }
 
-export default function Robot(props: RobotProps): JSX.Element {
+export default memo(function Robot(props: RobotProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
-  const isProjects: boolean = React.useMemo(
+  const isProjects: boolean = useMemo(
     () => props.path.includes("projects"),
-    [props.path]
+    [props.path],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!containerRef.current) return;
 
     // Scene
@@ -39,7 +39,7 @@ export default function Robot(props: RobotProps): JSX.Element {
       75,
       containerRef.current.clientWidth / containerRef.current.clientHeight,
       0.1,
-      1000
+      1000,
     );
     camera.position.z = 300;
     camera.position.y = 150;
@@ -49,7 +49,7 @@ export default function Robot(props: RobotProps): JSX.Element {
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(
       containerRef.current.clientWidth,
-      containerRef.current.clientHeight
+      containerRef.current.clientHeight,
     );
     renderer.setClearColor(0x000000, 0); // Set background to transparent
     renderer.shadowMap.enabled = true;
@@ -78,16 +78,16 @@ export default function Robot(props: RobotProps): JSX.Element {
         const mixer = new THREE.AnimationMixer(modelRobot);
         mixerRef.current = mixer;
 
-        // Play the third animation (index 2)
+        // Play Idle animation by default
         if (gltf.animations.length > 2) {
           const action = mixer.clipAction(
             gltf.animations[RobotAnimation.Idle],
-            modelRobot
+            modelRobot,
           );
           action.play();
         }
 
-        // Animation
+        // Animation Loop
         const clock = new THREE.Clock();
         const animate = () => {
           requestAnimationFrame(animate);
@@ -103,7 +103,7 @@ export default function Robot(props: RobotProps): JSX.Element {
       undefined,
       (error) => {
         console.error("An error happened while loading the model", error);
-      }
+      },
     );
 
     // Lights
@@ -171,4 +171,4 @@ export default function Robot(props: RobotProps): JSX.Element {
       )}
     </div>
   );
-}
+});

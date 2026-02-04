@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-01-17T00:00:00Z",
+  "nodes": [
+    {
+      "id": "ProjectsCarousel",
+      "path": "src/components/ProjectsCarousel/ProjectsCarousel.tsx"
+    },
+    {
+      "id": "CarouselProject",
+      "path": "src/components/ProjectsCarousel/CarouselProject/CarouselProject.tsx"
+    },
+    {
+      "id": "StuckGrid",
+      "path": "src/components/ProjectsCarousel/CarouselProject/StuckGrid/StuckGrid.tsx"
+    },
+    {
+      "id": "StuckGridItem",
+      "path": "src/components/ProjectsCarousel/CarouselProject/StuckGrid/StuckGridItem/StuckGridItem.tsx"
+    },
+    {
+      "id": "ProjectLeftContent",
+      "path": "src/components/ProjectLeftContent/ProjectLeftContent.tsx"
+    },
+    {
+      "id": "ProjectLeftContent.utils",
+      "path": "src/components/ProjectLeftContent/ProjectLeftContent.utils.ts"
+    },
+    { "id": "Project", "path": "src/components/Project/Project.tsx" },
+    { "id": "Robot", "path": "src/components/Robot/Robot.tsx" },
+    { "id": "Particles", "path": "src/components/Particles/Particles.tsx" },
+    { "id": "Lever", "path": "src/components/Lever/Lever.tsx" },
+    { "id": "Contexts", "path": "src/contexts" }
+  ],
+  "edges": [
+    { "from": "ProjectsCarousel", "to": "CarouselProject" },
+    { "from": "CarouselProject", "to": "StuckGrid" },
+    { "from": "StuckGrid", "to": "StuckGridItem" },
+    { "from": "CarouselProject", "to": "Project" },
+    { "from": "Project", "to": "ProjectLeftContent" },
+    { "from": "ProjectLeftContent", "to": "ProjectLeftContent.utils" },
+    { "from": "App", "to": "Contexts" },
+    { "from": "App", "to": "ProjectsCarousel" },
+    { "from": "App", "to": "Robot" },
+    { "from": "App", "to": "Particles" },
+    { "from": "App", "to": "Lever" }
+  ]
+}

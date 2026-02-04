@@ -1,66 +1,28 @@
-import React from "react";
 import styles from "./StuckGrid.module.scss";
 import StuckGridItem from "./StuckGridItem/StuckGridItem";
+import { useStuckGrid } from "../../../../customHooks/useStuckGrid";
 
 type TStuckGridProps = {
-  scale: number;
-  words: string[];
-};
-
-type TRange = {
-  start: number;
-  end: number;
-  length: number;
+  readonly scale: number;
+  readonly words: readonly string[];
 };
 
 export default function StuckGrid({
   scale,
   words,
 }: TStuckGridProps): JSX.Element {
-  const totalItems: number = words.length;
-
-  const calculateRange = (index: number, totalItems: number): TRange => {
-    const overlap: number = 0.1;
-    const length: number = Math.round((1 / totalItems) * 100) / 100;
-    const start: number = Math.max(0, Math.round(index * length * 100) / 100);
-    const end: number = Math.max(0, Math.min(1, start + length + overlap));
-    return { start, end, length };
-  };
-
-  function getSubProgress(
-    progress: number,
-    start: number,
-    end: number,
-    length: number
-  ): number {
-    if (progress < start) return 0;
-    if (progress > end) return 1;
-    return (progress - start) / length;
-  }
+  const items = useStuckGrid(scale, words);
 
   return (
     <div className={styles.stuckGrid}>
-      {words.map((item, index) => {
-        const MAX_SCALE_VALUE: number = 16;
-        const globalProgress: number = scale / MAX_SCALE_VALUE;
-
-        const range: TRange = calculateRange(index, totalItems);
-
-        const progress: number = getSubProgress(
-          globalProgress,
-          range.start,
-          range.end,
-          range.length
-        );
-        return (
-          <StuckGridItem
-            key={index}
-            item={item}
-            progress={progress}
-            index={index}
-          />
-        );
-      })}
+      {items.map((item) => (
+        <StuckGridItem
+          key={item.index}
+          item={item.word}
+          progress={item.progress}
+          index={item.index}
+        />
+      ))}
     </div>
   );
 }

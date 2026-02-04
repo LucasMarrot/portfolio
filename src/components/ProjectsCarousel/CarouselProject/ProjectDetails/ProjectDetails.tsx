@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./ProjectDetails.module.scss";
 import { TechnologyItem } from "../TechnologyItem/TechnologyItem";
 import { ProjectLink } from "../ProjectLink/ProjectLink";
@@ -7,31 +7,54 @@ import InteractiveObject from "../../../_commons/InteractiveObject/InteractiveOb
 import { InteractiveType } from "../../../../contexts/InteractiveContext";
 import { useStrings } from "../../../../customHooks/useStrings";
 
-export type TProjectLinks = {
-  browser?: {
-    text?: string;
-    link: string;
-  };
-  github?: {
-    text?: string;
-    link: string;
-  };
-  wiki?: {
-    text?: string;
-    link: string;
-  };
+/**
+ * Branded type for URL strings
+ */
+type TUrl = string & { readonly __brand: "Url" };
+
+const brandUrl = (url: string): TUrl => url as TUrl;
+
+/**
+ * Project link with required URL and optional display text
+ */
+type TProjectLink = {
+  text: string;
+  link: TUrl;
 };
 
+/**
+ * Project links collection requiring at least one link source
+ */
+export type TProjectLinks = {
+  browser?: TProjectLink;
+  github?: TProjectLink;
+  wiki?: TProjectLink;
+} & (
+  | { browser: TProjectLink }
+  | { github: TProjectLink }
+  | { wiki: TProjectLink }
+);
+
+/**
+ * Branded type for primary project color (hex format)
+ */
+export type TPrimaryColor = string & { readonly __brand: "PrimaryColor" };
+
+const brandPrimaryColor = (color: string): TPrimaryColor =>
+  color as TPrimaryColor;
+
 interface ProjectDetailsProps {
-  title: string;
-  year: string;
-  technologies: TTechnologyNames[];
-  description: string;
-  links: TProjectLinks;
-  primaryColor: string;
-  projectId: number;
-  logo: string;
+  readonly title: string;
+  readonly year: string;
+  readonly technologies: readonly TTechnologyNames[];
+  readonly description: string;
+  readonly links: TProjectLinks;
+  readonly primaryColor: TPrimaryColor;
+  readonly projectId: number;
+  readonly logo: JSX.Element;
 }
+
+export { brandUrl, brandPrimaryColor };
 
 export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   title,
@@ -44,6 +67,14 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   logo,
 }) => {
   const strings = useStrings();
+
+  const backgroundGradient = useMemo(
+    () =>
+      projectId % 2 !== 0
+        ? `linear-gradient(to left, ${primaryColor},var(--bg-color)) right`
+        : `linear-gradient(to right, ${primaryColor},var(--bg-color)) left`,
+    [projectId, primaryColor],
+  );
 
   return (
     <div className={styles.projectDetails}>
@@ -60,15 +91,13 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
       </InteractiveObject>
 
       <div
-        dangerouslySetInnerHTML={{ __html: logo }}
         className={styles.logoContainer}
         style={{
-          background:
-            projectId % 2 !== 0
-              ? `linear-gradient(to left, ${primaryColor},var(--bg-color)) right`
-              : `linear-gradient(to right, ${primaryColor},var(--bg-color)) left`,
+          background: backgroundGradient,
         }}
-      />
+      >
+        {logo}
+      </div>
 
       <div className={styles.headerContainer}>
         <h1>{title.toUpperCase()}</h1>

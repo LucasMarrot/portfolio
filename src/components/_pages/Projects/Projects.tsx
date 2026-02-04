@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useLanguage } from "../../../contexts/LanguageContext";
 import { useStrings } from "../../../customHooks/useStrings";
 import Header from "../../Header/Header";
@@ -5,6 +6,10 @@ import { ProjectLeftContent } from "../../ProjectLeftContent/ProjectLeftContent"
 import { getLogo } from "../../ProjectLeftContent/ProjectLeftContent.utils";
 import { TProject } from "../../ProjectsCarousel/CarouselProject/CarouselProject";
 import { ProjectsCarousel } from "../../ProjectsCarousel/ProjectsCarousel";
+import {
+  brandPrimaryColor,
+  brandUrl,
+} from "../../ProjectsCarousel/CarouselProject/ProjectDetails/ProjectDetails";
 
 const clim6440KeyWordsFR = [
   "Climaticien",
@@ -142,48 +147,55 @@ export default function Projects(): JSX.Element {
   const { language } = useLanguage();
   const strings = useStrings();
 
-  const projects: TProject[] = [
-    {
-      id: 1,
-      title: "AlgoForge",
-      year: "2025",
-      technologies: ["JS", "TS", "HTML", "CSS", "SCSS", "SVELTE", "BUN"],
-      description: strings.projects.algoForge.description,
-      links: {
-        browser: {
-          link: "https://algoforge.fr/",
+  const projects: TProject[] = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "AlgoForge",
+        year: "2025",
+        technologies: ["JS", "TS", "HTML", "CSS", "SCSS", "SVELTE", "BUN"],
+        description: strings.projects.algoForge.description,
+        links: {
+          browser: {
+            text: "Visit",
+            link: brandUrl("https://algoforge.fr/"),
+          },
+          github: {
+            text: "GitHub",
+            link: brandUrl("https://github.com/Bing-Chill-inc/Algoforge-main"),
+          },
+          wiki: {
+            text: "Wiki",
+            link: brandUrl("https://bing-chill-inc.github.io/wikiforge/"),
+          },
         },
-        github: {
-          link: "https://github.com/Bing-Chill-inc/Algoforge-main",
-        },
-        wiki: {
-          link: "https://bing-chill-inc.github.io/wikiforge/",
-        },
+        logo: getLogo("algoForge"),
+        primaryColor: brandPrimaryColor("#1c719c"),
+        leftContent: <ProjectLeftContent name="algoForge" />,
+        rightGifName: "DEMO_ALGOFORGE.gif",
+        keyWords: language === "fr" ? algoForgeKeyWordsFR : algoForgeKeyWordsEN,
       },
-      logo: getLogo("algoForge"),
-      primaryColor: "#1c719c",
-      leftContent: <ProjectLeftContent name="algoForge" />,
-      rightGifName: "DEMO_ALGOFORGE.gif",
-      keyWords: language === "fr" ? algoForgeKeyWordsFR : algoForgeKeyWordsEN,
-    },
-    {
-      id: 2,
-      title: "Clim 64-40",
-      year: "2024",
-      technologies: ["ILLUSTRATOR", "WIX"],
-      description: strings.projects.clim6440.description,
-      links: {
-        browser: {
-          link: "https://clim64-40.fr/",
+      {
+        id: 2,
+        title: "Clim 64-40",
+        year: "2024",
+        technologies: ["ILLUSTRATOR", "WIX"],
+        description: strings.projects.clim6440.description,
+        links: {
+          browser: {
+            text: "Visit",
+            link: brandUrl("https://clim64-40.fr/"),
+          },
         },
+        logo: getLogo("clim64-40"),
+        primaryColor: brandPrimaryColor("#CB161B"),
+        leftContent: <ProjectLeftContent name="clim64-40" />,
+        rightGifName: "DEMO_CLIM64-40.gif",
+        keyWords: language === "fr" ? clim6440KeyWordsFR : clim6440KeyWordsEN,
       },
-      logo: getLogo("clim64-40"),
-      primaryColor: "#CB161B",
-      leftContent: <ProjectLeftContent name="clim64-40" />,
-      rightGifName: "DEMO_CLIM64-40.gif",
-      keyWords: language === "fr" ? clim6440KeyWordsFR : clim6440KeyWordsEN,
-    },
-  ];
+    ],
+    [language, strings]
+  );
   return (
     <main>
       <Header />

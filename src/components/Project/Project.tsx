@@ -1,33 +1,39 @@
-import strings from "./Project.module.scss";
+import styles from "./Project.module.scss";
+import {
+  TProjectColors,
+  TFontFamily,
+  brandColorHex,
+  brandFontFamily,
+} from "../ProjectLeftContent/ProjectLeftContent.types";
 
 export type TProjectCardProps = {
-  logo: string;
+  logo: JSX.Element;
   title: string;
   description: string;
-  colors?: { color: string; fill: string };
-  fontFamily?: string;
+  colors?: TProjectColors;
+  fontFamily?: TFontFamily;
 };
 
 export const ProjectCard = ({
   logo,
   title,
   description,
-  colors = { color: "white", fill: "transparent" },
-  fontFamily = "Roboto",
+  colors = {
+    color: brandColorHex("white"),
+    fill: brandColorHex("transparent"),
+  },
+  fontFamily = brandFontFamily("Roboto"),
 }: TProjectCardProps): JSX.Element => {
   return (
     <div
-      className={strings.projectCard}
+      className={styles.projectCard}
       style={{ color: colors.color, fill: colors.fill }}
     >
-      <div
-        className={strings.projectCardContent}
-        dangerouslySetInnerHTML={{ __html: logo }}
-      />
-      <h1 className={strings.projectCardTitle} style={{ fontFamily }}>
+      <div className={styles.projectCardContent}>{logo}</div>
+      <h1 className={styles.projectCardTitle} style={{ fontFamily }}>
         {title}
       </h1>
-      <p className={strings.projectCardDescription}>{description}</p>
+      <p className={styles.projectCardDescription}>{description}</p>
     </div>
   );
 };

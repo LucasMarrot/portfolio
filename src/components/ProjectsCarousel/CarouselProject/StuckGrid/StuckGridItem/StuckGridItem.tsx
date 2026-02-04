@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import styles from "./StuckGridItem.module.scss";
 
 type TStuckGridItemProps = {
@@ -6,29 +7,43 @@ type TStuckGridItemProps = {
   progress: number;
 };
 
-export default function StuckGridItem(props: TStuckGridItemProps): JSX.Element {
-  const translateZ: number = -30 + props.progress * 60;
-  const opacity: number =
-    props.progress < 0.4 ? 0 : props.progress > 0.85 ? 1 : props.progress;
-  const blur: number = (1 - props.progress) * 5;
+const StuckGridItem = memo(
+  (props: TStuckGridItemProps): JSX.Element => {
 
-  const animationDisplay: string = props.progress === 1 ? "none" : "block";
-  const animationFilter: string = `blur(${blur || 4}px)`;
-  const animationOpacity: number = opacity || 0;
-  const animationTransform: string = `translateZ(${translateZ || -1000}px)`;
+    const animationValues = useMemo(() => {
+      const translateZ: number = -30 + props.progress * 60;
+      const opacity: number =
+        props.progress < 0.4 ? 0 : props.progress > 0.85 ? 1 : props.progress;
+      const blur: number = (1 - props.progress) * 5;
 
-  return (
-    <div
-      key={props.index}
-      className={`${styles.gridItem} ${styles[`gridItem${props.index + 1}`]}`}
-      style={{
-        transform: animationTransform,
-        opacity: animationOpacity,
-        filter: animationFilter,
-        display: animationDisplay,
-      }}
-    >
-      {props.item}
-    </div>
-  );
-}
+      return {
+        display: props.progress === 1 ? ("none" as const) : ("block" as const),
+        filter: `blur(${blur || 4}px)`,
+        opacity: opacity || 0,
+        transform: `translateZ(${translateZ || -1000}px)`,
+      };
+    }, [props.progress]);
+
+    return (
+      <div
+        className={`${styles.gridItem} ${styles[`gridItem${props.index + 1}`]}`}
+        style={{
+          transform: animationValues.transform,
+          opacity: animationValues.opacity,
+          filter: animationValues.filter,
+          display: animationValues.display,
+        }}
+      >
+        {props.item}
+      </div>
+    );
+  },
+  (prevProps, nextProps) => {
+    // Custom comparison: only re-render if progress changes significantly
+    return Math.abs(prevProps.progress - nextProps.progress) < 0.1;
+  }
+);
+
+StuckGridItem.displayName = "StuckGridItem";
+
+export default StuckGridItem;

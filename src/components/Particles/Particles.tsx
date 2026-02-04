@@ -1,8 +1,9 @@
+import React from "react";
 import styles from "./Particles.module.scss";
 
-const PARTICLES_NUMBER: number = 200;
+const PARTICLES_NUMBER: number = 100;
 
-export default function Particles() {
+export default React.memo(function Particles() {
   return (
     <div className={styles.particlesContainer}>
       {Array.from({ length: PARTICLES_NUMBER }).map((_, i) => (
@@ -15,4 +16,4 @@ export default function Particles() {
       ))}
     </div>
   );
-}
+});
