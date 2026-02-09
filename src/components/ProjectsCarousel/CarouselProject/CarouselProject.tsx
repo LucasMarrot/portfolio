@@ -124,8 +124,6 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
             technologies={props.project.technologies}
             description={props.project.description}
             links={props.project.links}
-            primaryColor={props.project.primaryColor}
-            projectId={props.project.id}
             logo={props.project.logo}
           />
         </div>

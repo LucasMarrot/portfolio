@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./ProjectDetails.module.scss";
 import { TechnologyItem } from "../TechnologyItem/TechnologyItem";
 import { ProjectLink } from "../ProjectLink/ProjectLink";
@@ -49,8 +49,6 @@ interface ProjectDetailsProps {
   readonly technologies: readonly TTechnologyNames[];
   readonly description: string;
   readonly links: TProjectLinks;
-  readonly primaryColor: TPrimaryColor;
-  readonly projectId: number;
   readonly logo: JSX.Element;
 }
 
@@ -62,19 +60,9 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   technologies,
   description,
   links,
-  primaryColor,
-  projectId,
   logo,
 }) => {
   const strings = useStrings();
-
-  const backgroundGradient = useMemo(
-    () =>
-      projectId % 2 !== 0
-        ? `linear-gradient(to left, ${primaryColor},var(--bg-color)) right`
-        : `linear-gradient(to right, ${primaryColor},var(--bg-color)) left`,
-    [projectId, primaryColor],
-  );
 
   return (
     <div className={styles.projectDetails}>
@@ -90,14 +78,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         </button>
       </InteractiveObject>
 
-      <div
-        className={styles.logoContainer}
-        style={{
-          background: backgroundGradient,
-        }}
-      >
-        {logo}
-      </div>
+      <div className={styles.logoContainer}>{logo}</div>
 
       <div className={styles.headerContainer}>
         <h1>{title.toUpperCase()}</h1>
