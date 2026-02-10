@@ -6,6 +6,7 @@ import InitScene from "./components/_pages/InitScene/InitScene";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/_pages/Home/Home";
 import Projects from "./components/_pages/Projects/Projects";
+import ProjectDetail from "./components/_pages/ProjectDetail/ProjectDetail";
 
 function App() {
   const [isInitComplete, setIsInitComplete] = React.useState(false);
@@ -33,7 +34,7 @@ function App() {
               }
             />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<></>} />
+            <Route path="/projects/:projectId" element={<ProjectDetail />} />
           </Routes>
         </HashRouter>
       </div>

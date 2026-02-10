@@ -3,8 +3,6 @@ import styles from "./ProjectDetails.module.scss";
 import { TechnologyItem } from "../TechnologyItem/TechnologyItem";
 import { ProjectLink } from "../ProjectLink/ProjectLink";
 import { TTechnologyNames } from "../TechnologyItem/TechnologyItem.utils";
-import InteractiveObject from "../../../_commons/InteractiveObject/InteractiveObject";
-import { InteractiveType } from "../../../../contexts/InteractiveContext";
 import { useStrings } from "../../../../customHooks/useStrings";
 
 /**
@@ -66,18 +64,6 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
   return (
     <div className={styles.projectDetails}>
-      <InteractiveObject
-        type={InteractiveType.CLICK}
-        className={styles.closeButtonContainer}
-      >
-        <button
-          onClick={() => window.location.reload()}
-          className={styles.closeButton}
-        >
-          X
-        </button>
-      </InteractiveObject>
-
       <div className={styles.logoContainer}>{logo}</div>
 
       <div className={styles.headerContainer}>
