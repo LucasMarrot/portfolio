@@ -23,7 +23,7 @@ export type TProject = {
   readonly primaryColor: TPrimaryColor;
   readonly keyWords: readonly string[];
   readonly leftContent: JSX.Element;
-  readonly rightGifName?: string;
+  readonly rightVideoName?: string;
   readonly title: string;
   readonly year: string;
   readonly technologies: readonly TTechnologyNames[];
@@ -61,12 +61,12 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
     [props.project.id, props.project.primaryColor],
   );
 
-  const backgroundImage = useMemo(
+  const videoSrc = useMemo(
     () =>
-      props.project.rightGifName
-        ? `url(${require(`../../../assets/images/${props.project.rightGifName}`)})`
+      props.project.rightVideoName
+        ? require(`../../../assets/videos/${props.project.rightVideoName}`)
         : undefined,
-    [props.project.rightGifName],
+    [props.project.rightVideoName],
   );
 
   return (
@@ -99,10 +99,18 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
           <div
             ref={rightBoxRef}
             className={styles.right}
-            style={{
-              backgroundImage,
-            }}
-          ></div>
+          >
+            {videoSrc && (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+            )}
+          </div>
         </div>
       </div>
     </div>

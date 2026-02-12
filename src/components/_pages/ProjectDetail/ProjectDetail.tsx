@@ -175,7 +175,7 @@ export default function ProjectDetail(): JSX.Element {
         logo: getLogo("algoForge"),
         primaryColor: brandPrimaryColor("#1c719c41"),
         leftContent: <ProjectLeftContent name="algoForge" />,
-        rightGifName: "DEMO_ALGOFORGE.gif",
+        rightVideoName: "DEMO_ALGOFORGE.mp4",
         keyWords: language === "fr" ? algoForgeKeyWordsFR : algoForgeKeyWordsEN,
       },
       {
@@ -193,7 +193,7 @@ export default function ProjectDetail(): JSX.Element {
         logo: getLogo("clim64-40"),
         primaryColor: brandPrimaryColor("#CB161B41"),
         leftContent: <ProjectLeftContent name="clim64-40" />,
-        rightGifName: "DEMO_CLIM64-40.gif",
+        rightVideoName: "DEMO_CLIM64-40.mp4",
         keyWords: language === "fr" ? clim6440KeyWordsFR : clim6440KeyWordsEN,
       },
     ],

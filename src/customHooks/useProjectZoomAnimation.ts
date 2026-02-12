@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { isMobileDevice } from "../utils/Utils";
 
 const MAX_SCALE_VALUE: number = 16;
 export const SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS: number = 1.5;
@@ -27,7 +28,7 @@ type TUseProjectZoomAnimationReturn = {
  * - React scale state is throttled (~15fps) — only used by StuckGrid for word appearances
  */
 export const useProjectZoomAnimation = (
-  props: TUseProjectZoomAnimationProps
+  props: TUseProjectZoomAnimationProps,
 ): TUseProjectZoomAnimationReturn => {
   const [scale, setScale] = useState(1);
 
@@ -48,7 +49,7 @@ export const useProjectZoomAnimation = (
 
     gsap.to(animationObject, {
       scale: MAX_SCALE_VALUE,
-      duration: 5,
+      duration: isMobileDevice() ? 5.5 : 5,
       ease: "none",
       onUpdate: () => {
         const currentScale = animationObject.scale;
@@ -57,7 +58,7 @@ export const useProjectZoomAnimation = (
         if (contentBoxRef.current) {
           contentBoxRef.current.style.transform = `scale(${currentScale})`;
           contentBoxRef.current.style.opacity = String(
-            Math.max(0, 1 - currentScale / (MAX_SCALE_VALUE / 2))
+            Math.max(0, 1 - currentScale / (MAX_SCALE_VALUE / 2)),
           );
         }
 
@@ -85,7 +86,7 @@ export const useProjectZoomAnimation = (
         triggerZoomAnimation();
       }
     },
-    [triggerZoomAnimation]
+    [triggerZoomAnimation],
   );
 
   // Touch move event handler
@@ -96,7 +97,7 @@ export const useProjectZoomAnimation = (
         triggerZoomAnimation();
       }
     },
-    [triggerZoomAnimation]
+    [triggerZoomAnimation],
   );
 
   // Setup wheel and touch listeners
@@ -106,21 +107,34 @@ export const useProjectZoomAnimation = (
       contentBox.addEventListener("wheel", handleScroll as EventListener, {
         passive: false,
       });
-      contentBox.addEventListener("touchmove", handleTouchMove as EventListener, {
-        passive: false,
-      });
+      contentBox.addEventListener(
+        "touchmove",
+        handleTouchMove as EventListener,
+        {
+          passive: false,
+        },
+      );
     }
 
     return () => {
       if (contentBox) {
         contentBox.removeEventListener("wheel", handleScroll as EventListener);
-        contentBox.removeEventListener("touchmove", handleTouchMove as EventListener);
+        contentBox.removeEventListener(
+          "touchmove",
+          handleTouchMove as EventListener,
+        );
       }
     };
   }, [handleScroll, handleTouchMove]);
 
   // Setup floating effect and mousemove listeners
   useEffect(() => {
+    let isMobile = isMobileDevice();
+
+    const handleResize = () => {;
+      isMobile = isMobileDevice();
+    };
+
     const left: HTMLDivElement | null = leftBoxRef.current;
     const right: HTMLDivElement | null = rightBoxRef.current;
 
@@ -160,11 +174,17 @@ export const useProjectZoomAnimation = (
       const rotYLeft: number = baseRotateY + offsetX * maxOffsetY + floatYL;
       const rotYRight: number = -baseRotateY - offsetX * maxOffsetY + floatYR;
 
-      if (left)
-        left.style.transform = `perspective(800px) rotateY(${rotYLeft}deg) rotateX(${rotX}deg) scale(1.2)`;
+      if (left) {
+        if (!isMobile || scale > SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS)
+          left.style.transform = `perspective(800px) rotateY(${rotYLeft}deg) rotateX(${rotX}deg) scale(1.2)`;
+        else left.style.transform = `perspective(800px) scale(1.2)`;
+      }
 
-      if (right)
-        right.style.transform = `perspective(800px) rotateY(${rotYRight}deg) rotateX(${rotX}deg) scale(1.2)`;
+      if (right) {
+        if (!isMobile || scale > SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS)
+          right.style.transform = `perspective(800px) rotateY(${rotYRight}deg) rotateX(${rotX}deg) scale(1.2)`;
+        else right.style.transform = `perspective(800px) scale(1.2)`;
+      }
 
       requestAnimationFrame(animate);
     };
@@ -182,16 +202,18 @@ export const useProjectZoomAnimation = (
       targetOffsetY = 0;
     };
 
+    window.addEventListener("resize", handleResize);
     document.body.addEventListener("mousemove", handleMouseMove);
     document.body.addEventListener("mouseleave", handleMouseLeave);
 
-    animate();
+    if (!isMobile) animate();
 
     return () => {
+      window.removeEventListener("resize", handleResize);
       document.body.removeEventListener("mousemove", handleMouseMove);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [scale]);
 
   return {
     scale,

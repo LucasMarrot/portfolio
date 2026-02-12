@@ -2,7 +2,7 @@
   text-align: center;
   width: 100dvw;
   height: 100dvh;
-  overflow: hidden;
+  overflow: auto;
 }
 
 @keyframes earthquake {
