@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkportfolio=self.webpackChunkportfolio||[]).push([[528],{528:(t,s,i)=>{i.r(s),i.d(s,{default:()=>a});var n=i(157),c=i(651);const o={contacts:"Contacts_contacts__AkU-B"};var e=i(579);function a(){const t=(0,n.k)();return(0,e.jsxs)("div",{className:o.contacts,children:[(0,e.jsx)(c.s,{type:"github",text:t.visitMyGithub,link:"https://github.com/LucasMarrot"}),(0,e.jsx)(c.s,{type:"linkedin",text:t.visitMyLinkedin,link:"https://www.linkedin.com/in/lucas-marrot/"})]})}}}]);
+//# sourceMappingURL=528.131276b1.chunk.js.map
