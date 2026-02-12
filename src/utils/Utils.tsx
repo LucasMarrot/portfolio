@@ -9,6 +9,5 @@ export function isSafari() {
 
 export function isMobileDevice() {
   // Under 768px width, we consider it a mobile device
-  console.log("TEST MOBILE", window.innerWidth);
   return window.innerWidth < 768;
 }

@@ -2,16 +2,14 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CarouselProject.module.scss";
 import StuckGrid from "./StuckGrid/StuckGrid";
-import {
-  TProjectLinks,
-  TPrimaryColor,
-} from "./ProjectDetails/ProjectDetails";
+import { TProjectLinks, TPrimaryColor } from "./ProjectDetails/ProjectDetails";
 import { TTechnologyNames } from "./TechnologyItem/TechnologyItem.utils";
 import { useStrings } from "../../../customHooks/useStrings";
 import {
   useProjectZoomAnimation,
   SCALE_VALUE_WHEN_MIDDLE_DISAPPEARS,
 } from "../../../customHooks/useProjectZoomAnimation";
+import { isSafari } from "../../../utils/Utils";
 
 /**
  * Core project data structure with stricter typing
@@ -41,17 +39,13 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
   const strings = useStrings();
   const navigate = useNavigate();
 
-  const {
-    scale,
-    contentBoxRef,
-    leftBoxRef,
-    rightBoxRef,
-  } = useProjectZoomAnimation({
-    onIsTriggerScrollChange: props.onIsTriggerScrollChange,
-    onAnimationComplete: () => {
-      navigate(`/projects/${props.project.id}`);
-    },
-  });
+  const { scale, contentBoxRef, leftBoxRef, rightBoxRef } =
+    useProjectZoomAnimation({
+      onIsTriggerScrollChange: props.onIsTriggerScrollChange,
+      onAnimationComplete: () => {
+        navigate(`/projects/${props.project.id}`);
+      },
+    });
 
   const backgroundGradient = useMemo(
     () =>
@@ -61,13 +55,18 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
     [props.project.id, props.project.primaryColor],
   );
 
-  const videoSrc = useMemo(
-    () =>
-      props.project.rightVideoName
+  const videoSrc = useMemo(() => {
+    if (!isSafari())
+      return props.project.rightVideoName
         ? require(`../../../assets/videos/${props.project.rightVideoName}`)
-        : undefined,
-    [props.project.rightVideoName],
-  );
+        : undefined;
+    else
+      return props.project.rightVideoName
+        ? require(
+            `../../../assets/images/${props.project.rightVideoName.replace(".mp4", ".gif")}`,
+          )
+        : undefined;
+  }, [props.project.rightVideoName]);
 
   return (
     <div
@@ -77,13 +76,8 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
         background: backgroundGradient,
       }}
     >
-      {scale > 1 && (
-        <StuckGrid scale={scale} words={props.project.keyWords} />
-      )}
-      <div
-        className={styles.contentBox}
-        ref={contentBoxRef}
-      >
+      {scale > 1 && <StuckGrid scale={scale} words={props.project.keyWords} />}
+      <div className={styles.contentBox} ref={contentBoxRef}>
         <div className={styles.container}>
           <div ref={leftBoxRef} className={styles.left}>
             {props.project.leftContent}
@@ -96,20 +90,15 @@ export const CarouselProject = (props: TCarouselProjectProps): JSX.Element => {
               </>
             )}
           </div>
-          <div
-            ref={rightBoxRef}
-            className={styles.right}
-          >
-            {videoSrc && (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-              >
-                <source src={videoSrc} type="video/mp4" />
-              </video>
-            )}
+          <div ref={rightBoxRef} className={styles.right}>
+            {videoSrc &&
+              (!isSafari() ? (
+                <video autoPlay loop muted playsInline preload="auto">
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+              ) : (
+                <img src={videoSrc} alt={`${props.project.title} preview`} />
+              ))}
           </div>
         </div>
       </div>

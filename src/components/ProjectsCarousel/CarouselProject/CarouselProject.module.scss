@@ -86,9 +86,8 @@
   @media (max-width: 768px) {
     max-width: 100%;
     min-width: auto;
-    min-height: fit-content;
     margin: 10px;
-    flex: 0;
+    flex: none;
     transform: none !important; // Override perspective transforms
   }
 }
@@ -114,7 +113,8 @@
   height: fit-content;
   width: 100%;
 
-  & > video {
+  & > video,
+  & > img {
     aspect-ratio: 16 / 10;
     width: 100%;
     object-fit: cover;
@@ -124,7 +124,7 @@
   @media (max-width: 768px) {
     aspect-ratio: 16 / 10;
     width: 60%;
-    height: fit-content;
+    height: auto;
   }
 }
 
@@ -148,6 +148,7 @@
 
   @media (max-width: 768px) {
     padding-bottom: 50%;
+    height: 10%;
     min-height: 0 !important;
   }
 }
